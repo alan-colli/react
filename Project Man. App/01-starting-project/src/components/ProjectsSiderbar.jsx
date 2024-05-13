@@ -1,9 +1,14 @@
 import Button from "./Button";
 
-export default function ProjectSidebar({ onStartAddProject, projects }) {
+export default function ProjectSidebar({
+  onStartAddProject,
+  projects,
+  onSelectProject,
+  selectedProjectId,
+}) {
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
-    const options = { month: "long", day: "numeric", year: "numeric" };
+    const options = { month: "short", day: "numeric", year: "numeric" };
     return date.toLocaleDateString(undefined, options);
   };
   return (
@@ -14,14 +19,27 @@ export default function ProjectSidebar({ onStartAddProject, projects }) {
       <div className="mb-8">
         <Button onClick={onStartAddProject}> + Add Project</Button>
       </div>
-      <ul>
-        {projects.map((project) => (
-          <li className="mb-4 bg-white text-black rounded-md p-4 font-old-bold">
-            <p>Title: {project.title}</p>
-            <p>Description: {project.description}</p>
-            <p>Due date: {formatDate(project.dueDate)}</p>
-          </li>
-        ))}
+      <ul className="mt-8">
+        {projects.map((project) => {
+          let cssClasses =
+            "w-full text-left px-2 py-1 rounded-sm my-1 text-stone-400 hover:text-stone-200 hover:bg-stone-800";
+          if (project.id === selectedProjectId) {
+            cssClasses += " bg-stone-800 text-stone-200";
+          } else {
+            cssClasses += " text-stone-400";
+          }
+
+          return (
+            <li key={project.id}>
+              <button
+                className={cssClasses}
+                onClick={() => onSelectProject(project.id)}
+              >
+                {project.title}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );
