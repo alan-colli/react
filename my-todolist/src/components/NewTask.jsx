@@ -3,7 +3,7 @@ import Input from "./Input.jsx";
 
 export default function NewTask() {
   return (
-    <div className="bg-blue-400 flex flex-col items-center w-1/4 rounded-md border-2 border-black">
+    <div className="bg-blue-400 flex flex-col items-center w-96 rounded-md border-2 border-black">
       <menu className="flex space-x-5 mt-2">
         <li>
           <AddButton>Save</AddButton>
