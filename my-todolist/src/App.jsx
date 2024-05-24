@@ -6,25 +6,31 @@ import NoTaskCreated from "./components/NoTaskCreated.jsx";
 import { useState } from "react";
 
 function App() {
-  // const [taskState, setTaskState] = useState({
-  //   tasks: [],
-  // });
+  const [tasks, setTasks] = useState([]);
 
-  // function handleAddTask() {
-  //   setTaskState((prevState) => {
-  //     return {
-  //       ...prevState,
-  //       selectedTaskId: null,
-  //     };
-  //   });
-  // }
+  const [isAddingTask, setIsAddingTask] = useState(false);
+
+  function handleAddTask() {
+    setIsAddingTask(true);
+  }
+
+  function handleSaveTask(task) {
+    setTasks([...tasks, task]);
+    setIsAddingTask(false);
+  }
+
+  function handleCancelTask() {
+    setIsAddingTask(false);
+  }
 
   return (
     <>
+      {isAddingTask && (
+        <NewTask handleSave={handleSaveTask} handleCancel={handleCancelTask} />
+      )}
       <Header />
-      <AddButton>+ Add</AddButton>
-      <TaskSpace /*onAddTask={handleStartAddTask}*/ />
-      <NoTaskCreated />
+      <AddButton onClick={handleAddTask}>+ Add</AddButton>
+      <TaskSpace tasks={tasks} />
     </>
   );
 }

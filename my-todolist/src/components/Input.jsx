@@ -1,6 +1,6 @@
 export default function Input({ label, textarea, ...props }) {
   return (
-    <p className="text-white m-2">
+    <p className="text-black m-2">
       <label className="my-1">{label}</label>
       {textarea ? (
         <textarea className="rounded-md" {...props} />
