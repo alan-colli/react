@@ -2,7 +2,6 @@ import Header from "./components/Header.jsx";
 import AddButton from "./components/AddButton.jsx";
 import TaskSpace from "./components/TaskSpace.jsx";
 import NewTask from "./components/NewTask.jsx";
-import NoTaskCreated from "./components/NoTaskCreated.jsx";
 import { useState } from "react";
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
   }
 
   function handleSaveTask(task) {
-    setTasks([...tasks, task]);
+    setTasks((prevState) => [...prevState, task]);
     setIsAddingTask(false);
   }
 
