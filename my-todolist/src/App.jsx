@@ -25,7 +25,11 @@ function App() {
   return (
     <>
       {isAddingTask && (
-        <NewTask handleSave={handleSaveTask} handleCancel={handleCancelTask} />
+        <NewTask
+          isOpen={isAddingTask}
+          onRequestClose={handleCancelTask}
+          handleSave={handleSaveTask}
+        />
       )}
       <Header />
       <AddButton onClick={handleAddTask}>+ Add</AddButton>
