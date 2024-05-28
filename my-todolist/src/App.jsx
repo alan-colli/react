@@ -22,6 +22,10 @@ function App() {
     setIsAddingTask(false);
   }
 
+  const handleDeleteTask = (index) => {
+    setTasks((prevState) => prevState.filter((_, i) => i !== index));
+  };
+
   return (
     <>
       {isAddingTask && (
@@ -33,7 +37,7 @@ function App() {
       )}
       <Header />
       <AddButton onClick={handleAddTask}>+ Add</AddButton>
-      <TaskSpace tasks={tasks} />
+      <TaskSpace tasks={tasks} onDeleteTask={handleDeleteTask} />
     </>
   );
 }
