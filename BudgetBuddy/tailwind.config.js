@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#4CAF50", // Green
-        secondary: "#FF9800", // Orange
-        accent: "#FFC107", // Amber
-        background: "#F5F5F5", // Light Gray
-        text: "#333333", // Dark Gray
-        positive: "#4CAF50", // Positive Balance Green
-        negative: "#F44336", // Negative Balance Red
+        primary: "#0D1B2A", // Green
+        secondary: "#415A77", // Orange
+        third: "#1B263B", // Amber
+        fourth: "#778DA9", // Light Gray
+        text: "#E0E1DD", // Dark Gray
+        positive: "#37FF00", // Positive Balance Green
+        negative: "#FF0000", // Negative Balance Red
       },
     },
   },
