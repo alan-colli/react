@@ -5,7 +5,7 @@ export default function Header() {
         Budget Buddy
       </h1>
       <p className="flex flex-col items-center justify-center text-2xl text-text font-serif">
-        Help you to save!
+        Help you to manage!
       </p>
     </div>
   );
