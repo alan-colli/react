@@ -1,5 +1,6 @@
 import Button from "./components/Button";
 import Counter from "./components/Counter";
+
 import Header from "./components/Header";
 import Input from "./components/Modal";
 import { useState } from "react";
@@ -7,6 +8,31 @@ import { useState } from "react";
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [listTransaction, setListTransaction] = useState([]);
+  const [numberInput, setNumberInput] = useState("");
+  const [textInput, setTextInput] = useState("");
+  const [dateInput, setDateInput] = useState("");
+
+  function handleNumberInputChange(e) {
+    setNumberInput(e.target.value);
+  }
+  function handleTextInputChange(e) {
+    setTextInput(e.target.value);
+  }
+  function handleDateInputChange(e) {
+    setDateInput(e.target.value);
+  }
+
+  function addToList() {
+    const newList = {
+      number: numberInput,
+      text: textInput,
+      date: dateInput,
+    };
+    setListTransaction([...listTransaction, newList]);
+    setNumberInput("");
+    setNumberInput("");
+    setDateInput("");
+  }
 
   function handleModalOpen() {
     setIsModalOpen(true);
@@ -26,11 +52,15 @@ export default function App() {
           isOpen={isModalOpen}
           onRequestClose={handleModalClose}
           handleSave={handleSave}
+          onTextInputChange={handleTextInputChange}
+          onNumberInputChange={handleNumberInputChange}
+          onDateInputChange={handleDateInputChange}
+          onAddToList={addToList}
         />
       )}
       <Header />
       <Button onClick={handleModalOpen}>Transaction</Button>
-      <Counter> $</Counter>
+      <Counter listTransaction={listTransaction}>$</Counter>
     </div>
   );
 }

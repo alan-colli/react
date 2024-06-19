@@ -4,7 +4,17 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
-export default function Input({ isOpen, onRequestClose, handleSave }) {
+export default function Input({
+  isOpen,
+  onRequestClose,
+  handleSave,
+  textInput,
+  onTextInputChange,
+  numberInput,
+  onNumberInputChange,
+  dateInput,
+  onDateInputChange,
+}) {
   const [transaction, setTransaction] = useState([]);
 
   function handleCancel() {
@@ -31,9 +41,8 @@ export default function Input({ isOpen, onRequestClose, handleSave }) {
               className="rounded-md text-primary font-serif pl-2 placeholder-primary"
               type="number"
               placeholder="Value"
-              onChange={(e) =>
-                setTransaction({ ...transaction, Value: e.target.value })
-              }
+              value={numberInput}
+              onChange={onNumberInputChange}
             />
           </div>
           <div>
@@ -41,18 +50,16 @@ export default function Input({ isOpen, onRequestClose, handleSave }) {
               className="rounded-md text-primary font-serif pl-2 placeholder-primary"
               type="text"
               placeholder="Description"
-              onChange={(e) =>
-                setTransaction({ ...transaction, Description: e.target.value })
-              }
+              value={textInput}
+              onChange={onTextInputChange}
             />
           </div>
           <div>
             <input
               className="rounded-md text-primary font-serif pl-2"
               type="date"
-              onChange={(e) =>
-                setTransaction({ ...transaction, Date: e.target.value })
-              }
+              value={dateInput}
+              onChange={onDateInputChange}
             />
           </div>
         </div>
