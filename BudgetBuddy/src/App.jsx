@@ -11,6 +11,7 @@ export default function App() {
   const [numberInput, setNumberInput] = useState("");
   const [textInput, setTextInput] = useState("");
   const [dateInput, setDateInput] = useState("");
+  const [amount, setAmount] = useState(0);
 
   function handleNumberInputChange(e) {
     setNumberInput(e.target.value);
@@ -39,12 +40,22 @@ export default function App() {
   }
   function handleModalClose() {
     setIsModalOpen(false);
+    setNumberInput("");
+    setDateInput("");
+    setTextInput("");
   }
 
-  function handleSave(transaction) {
-    setListTransaction([...listTransaction, transaction]);
-    setIsModalOpen(false);
+  function handleSave() {
+    const newTransaction = {
+      number: parseFloat(numberInput),
+      text: textInput,
+      date: dateInput,
+    };
+    setListTransaction([newTransaction, ...listTransaction]);
+    setAmount((prevAmount) => prevAmount + newTransaction.number);
+    handleModalClose();
   }
+
   return (
     <div>
       {isModalOpen && (
@@ -55,12 +66,16 @@ export default function App() {
           onTextInputChange={handleTextInputChange}
           onNumberInputChange={handleNumberInputChange}
           onDateInputChange={handleDateInputChange}
-          onAddToList={addToList}
+          numberInput={numberInput}
+          textInput={textInput}
+          dateInput={dateInput}
         />
       )}
       <Header />
       <Button onClick={handleModalOpen}>Transaction</Button>
-      <Counter listTransaction={listTransaction}>$</Counter>
+      <Counter listTransaction={listTransaction} amount={amount}>
+        $
+      </Counter>
     </div>
   );
 }
