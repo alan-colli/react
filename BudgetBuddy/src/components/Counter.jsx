@@ -1,4 +1,5 @@
 export default function Counter({ amount, listTransaction }) {
+  console.log(amount);
   return (
     <div className="w-full h-full flex justify-center">
       <div className="flex  w-4/5 h-96 bg-secondary mt-12 rounded-lg">
@@ -16,7 +17,7 @@ export default function Counter({ amount, listTransaction }) {
           <div className="bg-primary text-text pb-6 flex flex-col  w-1/3 h-96 justify-start items-start">
             {listTransaction.map((transaction, index) => (
               <div key={index} className="pb-4 ">
-                {transaction.number > 0 ? (
+                {!transaction.isExpense ? (
                   <>
                     <p className="font-serif text-positive">
                       Value: {transaction.number}
@@ -31,7 +32,7 @@ export default function Counter({ amount, listTransaction }) {
                 ) : (
                   <>
                     <p className="font-serif text-negative">
-                      Value: {transaction.number}
+                      Value: -{transaction.number}
                     </p>
                     <p className="font-serif text-negative">
                       Description: {transaction.text}

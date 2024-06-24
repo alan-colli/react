@@ -1,58 +1,73 @@
 import Button from "./components/Button";
 import Counter from "./components/Counter";
-
 import Header from "./components/Header";
 import Input from "./components/Modal";
 import { useState } from "react";
 
+const transactionInitialState = {
+  numberInput: "",
+  textInput: "",
+  dateInput: "",
+  isExpense: false,
+};
+
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [listTransaction, setListTransaction] = useState([]);
-  const [numberInput, setNumberInput] = useState("");
-  const [textInput, setTextInput] = useState("");
-  const [dateInput, setDateInput] = useState("");
-  const [amount, setAmount] = useState(0);
 
+  const [amount, setAmount] = useState(0);
+  const [transaction, setTransaction] = useState(transactionInitialState);
   function handleNumberInputChange(e) {
-    setNumberInput(e.target.value);
+    setTransaction((prevNumberInput) => ({
+      ...prevNumberInput,
+      numberInput: parseFloat(e.target.value),
+    }));
   }
   function handleTextInputChange(e) {
-    setTextInput(e.target.value);
+    setTransaction((prevTextInput) => ({
+      ...prevTextInput,
+      textInput: e.target.value,
+    }));
   }
   function handleDateInputChange(e) {
-    setDateInput(e.target.value);
+    setTransaction((prevDateInput) => ({
+      ...prevDateInput,
+      dateInput: e.target.value,
+    }));
   }
 
-  function addToList() {
-    const newList = {
-      number: numberInput,
-      text: textInput,
-      date: dateInput,
-    };
-    setListTransaction([...listTransaction, newList]);
-    setNumberInput("");
-    setNumberInput("");
-    setDateInput("");
+  function handleIsExpenseChange(e) {
+    setTransaction((prevIsExpense) => ({
+      ...prevIsExpense,
+      isExpense: Boolean(e.target.value),
+    }));
   }
 
   function handleModalOpen() {
+    setTransaction(transactionInitialState);
     setIsModalOpen(true);
   }
   function handleModalClose() {
+    setTransaction(transactionInitialState);
     setIsModalOpen(false);
-    setNumberInput("");
-    setDateInput("");
-    setTextInput("");
   }
 
   function handleSave() {
+    const { numberInput, textInput, dateInput, isExpense } = transaction;
     const newTransaction = {
-      number: parseFloat(numberInput),
+      number: numberInput,
       text: textInput,
       date: dateInput,
+      isExpense,
     };
     setListTransaction([newTransaction, ...listTransaction]);
-    setAmount((prevAmount) => prevAmount + newTransaction.number);
+    setAmount((prevAmount) => {
+      debugger;
+      if (newTransaction.isExpense) {
+        return prevAmount - newTransaction.number;
+      }
+      return prevAmount + newTransaction.number;
+    });
     handleModalClose();
   }
 
@@ -66,9 +81,8 @@ export default function App() {
           onTextInputChange={handleTextInputChange}
           onNumberInputChange={handleNumberInputChange}
           onDateInputChange={handleDateInputChange}
-          numberInput={numberInput}
-          textInput={textInput}
-          dateInput={dateInput}
+          transaction={transaction}
+          onIsExpenseChange={handleIsExpenseChange}
         />
       )}
       <Header />
