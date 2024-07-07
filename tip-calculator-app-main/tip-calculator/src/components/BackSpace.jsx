@@ -31,7 +31,7 @@ export default function BackSpace() {
             <button className="bg-buttonNormal text-gray-100 w-28 h-8 rounded-md hover:scale-105">
               25%
             </button>
-            <button className="bg-gray-100 bg-buttonNormal w-28 h-8 rounded-md hover:scale-105">
+            <button className="bg-gray-100 text-buttonNormal w-28 h-8 rounded-md hover:scale-105">
               Custom
             </button>
           </div>
