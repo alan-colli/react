@@ -1,5 +1,4 @@
 import React from "react";
-import Results from "./Results";
 
 export default function BackSpace() {
   return (
@@ -53,7 +52,20 @@ export default function BackSpace() {
           </div>
         </div>
         <div className="w-1/2 flex justify-center items-center">
-          <Results />
+          <div className="w-full h-full bg-buttonNormal flex flex-col rounded-3xl">
+            <div className="flex justify-between px-8 pt-20">
+              <p className="text-white text-lg">Tip Amount</p>
+              <p className="text-white pr-12 text-3xl">30</p>
+            </div>
+            <div className="flex justify-between px-8 pt-20">
+              <p className="text-white text-lg">
+                Total Amount
+                <br />
+                /Person
+              </p>
+              <p className="text-white pr-12 text-3xl">24</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
