@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 
-export default function ClickScreen() {
-  const [clickPosition, setClickPosition] = useState([]);
-
-  const handleClick = (event) => {
-    const rect = event.target.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    setClickPosition([...clickPosition, { x, y }]);
-    console.log(clickPosition);
-  };
-
+export default function ClickScreen({ clickPosition, handleClick }) {
   return (
     <div className="relative w-[60vw] h-[60vh] bg-white" onClick={handleClick}>
       {clickPosition.map((click, index) => (
