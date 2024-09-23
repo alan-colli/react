@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 export default function ClickScreen({ clickPosition, handleClick }) {
   return (
     <div className="relative w-[60vw] h-[60vh] bg-white" onClick={handleClick}>
