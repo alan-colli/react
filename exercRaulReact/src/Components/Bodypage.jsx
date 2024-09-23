@@ -1,3 +1,4 @@
+import Button from "./Button";
 import ClickScreen from "./ClickScreen";
 
 export default function Bodypage() {
@@ -16,9 +17,7 @@ export default function Bodypage() {
         id="footer"
         className="w-[60vw] h-[5vh] bg-gray-300 rounded-b-[8px] flex flex-col justify-center items-center"
       >
-        <button className="bg-white text-gray-800 w-[5vw] border-2 border-gray-800 rounded hover:border-red-600 hover:text-red-600">
-          Refazer
-        </button>
+        <Button></Button>
       </div>
     </div>
   );
