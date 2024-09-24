@@ -24,10 +24,7 @@ export default function Bodypage() {
     if (deleted.length > 0) {
       const restoredItem = deleted[deleted.length - 1];
       setDeleted(deleted.slice(0, -1));
-      setClickPosition((prevClickPosition) => [
-        ...prevClickPosition,
-        restoredItem,
-      ]);
+      setClickPosition((ClickPosition) => [...ClickPosition, restoredItem]);
     }
   };
 
