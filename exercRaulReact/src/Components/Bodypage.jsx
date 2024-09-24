@@ -1,10 +1,11 @@
-import Button from "./Button";
+import ButtonDelete from "./ButtonDelete";
+import ButtonReDo from "./ButtonReDo";
 import ClickScreen from "./ClickScreen";
 import React, { useState } from "react";
 
 export default function Bodypage() {
   const [clickPosition, setClickPosition] = useState([]);
-  const [message, setMessage] = useState("");
+  const [deleted, setDeleted] = useState([]);
 
   const handleClick = (event) => {
     const rect = event.target.getBoundingClientRect();
@@ -13,20 +14,25 @@ export default function Bodypage() {
     setClickPosition([...clickPosition, { x, y }]);
   };
 
-  const onButtonClick = () => {
-    if (clickPosition.length !== 0) {
-      setClickPosition(clickPosition.slice(0, -1));
-      setMessage("");
-    } else {
-      setMessage("Não há pontos para remover");
+  const onButtonDeleteClick = () => {
+    const removedItem = clickPosition[clickPosition.length - 1];
+    setClickPosition(clickPosition.slice(0, -1));
+    setDeleted((deleted) => [...deleted, removedItem]);
+  };
+
+  const onButtonReDoClick = () => {
+    if (deleted.length > 0) {
+      const restoredItem = deleted[deleted.length - 1];
+      setDeleted(deleted.slice(0, -1));
+      setClickPosition((prevClickPosition) => [
+        ...prevClickPosition,
+        restoredItem,
+      ]);
     }
   };
 
   return (
     <div className=" bg-gray-500 w-screen h-screen flex  flex-col items-center">
-      {message && (
-        <div className="bg-red-500 text-white p-2 rounded mt-4">{message}</div>
-      )}
       <div
         id="header"
         className="bg-gray-300 w-[60vw] h-[5vh] flex justify-center items-center mt-24 rounded-t-[8px] "
@@ -41,9 +47,16 @@ export default function Bodypage() {
       ></ClickScreen>
       <div
         id="footer"
-        className="w-[60vw] h-[5vh] bg-gray-300 rounded-b-[8px] flex flex-col justify-center items-center"
+        className="w-[60vw] h-[5vh] bg-gray-300 rounded-b-[8px] flex  justify-center items-center space-x-4"
       >
-        <Button onButtonClick={onButtonClick}></Button>
+        {clickPosition.length > 0 && (
+          <ButtonDelete
+            onButtonDeleteClick={onButtonDeleteClick}
+          ></ButtonDelete>
+        )}
+        {deleted.length > 0 && (
+          <ButtonReDo onButtonReDoClick={onButtonReDoClick}></ButtonReDo>
+        )}
       </div>
     </div>
   );
