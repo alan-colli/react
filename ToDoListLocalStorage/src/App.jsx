@@ -41,7 +41,7 @@ export default function App() {
             None activity has been added!
           </p>
         ) : (
-          <Card />
+          <Card task={task} />
         )}
       </div>
       <Modal
