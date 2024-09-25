@@ -21,7 +21,7 @@ export default function Modal({ showModal, handleModalClose, handleAttList }) {
         <div className="bg-gray-100 p2 rounded h-[35vh]">
           <div className="flex justify-end p-4 w-[30vw] ">
             <button
-              className="justify-center items-center flex bg-red-600 text-gray-100 border-2 border-black w-6 h-6 hover:bg-gray-100 hover:text-red-600"
+              className="justify-center items-center flex bg-red-600 text-gray-300 border-2 border-black w-6 h-6 hover:bg-gray-100 hover:text-red-600"
               onClick={handleCancelTask}
             >
               X
