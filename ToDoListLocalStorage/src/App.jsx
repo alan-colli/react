@@ -23,6 +23,8 @@ export default function App() {
     setList((prevState) => prevState.filter((_, i) => i !== index));
   };
 
+  const handleEdit = (index) => {};
+
   return (
     <div className="bg-blue-800 h-[100vh] w-[100vw] justify-start flex flex-col items-center">
       <Header />
