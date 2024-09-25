@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Card from "./Components/Card";
 import Header from "./Components/Header";
 import Modal from "./Components/Modal";
 
@@ -41,7 +40,18 @@ export default function App() {
             None activity has been added!
           </p>
         ) : (
-          <Card task={task} />
+          <div className="h-[28vh] w-[12.5vw] bg-gray-100 flex flex-col justify-start items-start rounded-md pl-4 pt-4 space-y-8">
+            {list.map((task, index) => (
+              <div key={index} className="space-y-16 ml-4">
+                <p>Activity: {task.Activity}</p>
+                <p>Date: {task.Date}</p>
+              </div>
+            ))}
+            <div className="pt-12 space-x-24 ml-4">
+              <button>Edit</button>
+              <button></button>
+            </div>
+          </div>
         )}
       </div>
       <Modal
