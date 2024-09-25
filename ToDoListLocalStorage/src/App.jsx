@@ -16,7 +16,7 @@ export default function App() {
   };
 
   const handleAttList = (task) => {
-    setList([...list, task]);
+    setList((prevList) => [...prevList, task]);
     console.log(list);
   };
 
@@ -34,8 +34,15 @@ export default function App() {
           Edit
         </button>
       </div>
+
       <div className="bg-red-300 w-[70vw] h-[80vh] flex items-start justify-start rounded-md p-8">
-        <Card />
+        {list.length === 0 ? (
+          <p className="text-black flex justify-center items-center w-full h-full ">
+            None activity has been added!
+          </p>
+        ) : (
+          <Card />
+        )}
       </div>
       <Modal
         showModal={showModal}

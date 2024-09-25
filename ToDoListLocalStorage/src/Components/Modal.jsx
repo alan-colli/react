@@ -6,8 +6,7 @@ export default function Modal({ showModal, handleModalClose, handleAttList }) {
   if (!showModal) return null;
 
   const handleSaveTask = () => {
-    setTask(task);
-
+    handleAttList(task);
     handleModalClose();
   };
 
