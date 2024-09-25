@@ -33,12 +33,12 @@ export default function App() {
           Edit
         </button>
       </div>
-      {list.length === 0 ? (
-        <p className="text-black flex justify-center items-center w-full h-full">
-          None activity has been added!
-        </p>
-      ) : (
-        <div className="bg-red-300 w-[70vw] h-[80vh] flex items-start justify-start rounded-md p-8">
+      <div className="bg-red-300 w-[70vw] h-[80vh] flex items-start justify-start rounded-md p-8">
+        {list.length === 0 ? (
+          <p className="text-black flex justify-center items-center w-full h-full">
+            None activity has been added!
+          </p>
+        ) : (
           <div className="h-[28vh] w-[12.5vw] bg-gray-100 flex flex-col justify-start items-start rounded-md pl-4 pt-4 space-y-8">
             {list.map((task, index) => (
               <div key={index} className="space-y-16 ml-4">
@@ -51,13 +51,13 @@ export default function App() {
               <button>Delete</button>
             </div>
           </div>
-        </div>
-      )}
-      <Modal
-        showModal={showModal}
-        handleModalClose={handleModalClose}
-        handleAttList={handleAttList}
-      />
+        )}
+        <Modal
+          showModal={showModal}
+          handleModalClose={handleModalClose}
+          handleAttList={handleAttList}
+        />
+      </div>
     </div>
   );
 }
