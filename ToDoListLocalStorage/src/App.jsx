@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./Components/Modal";
 import Header from "./Components/Header";
 
@@ -6,6 +6,19 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [list, setList] = useState([]);
   const [edit, setEdit] = useState("");
+
+  useEffect(() => {
+    const listStorage = localStorage.getItem("list");
+    if (listStorage) {
+      setList(JSON.parse(listStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (list.length > 0) {
+      localStorage.setItem("list", JSON.stringify(list));
+    }
+  }, [list]);
 
   const handleModalOpen = () => {
     setShowModal(true);
