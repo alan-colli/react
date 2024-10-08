@@ -4,61 +4,61 @@ export default function ButtonsSpace({ handleShowModal }) {
       <div className="grid grid-cols-2 gap-4 w-full h-full  justify-items-center">
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("brazil")}
         >
           Brazil
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("germany")}
         >
           Germany
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw]  hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("united states")}
         >
           USA
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("canada")}
         >
           Canada
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("france")}
         >
           France
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("argentina")}
         >
           Argentina
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("netherlands")}
         >
           Netherlands
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("japan")}
         >
           Japan
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("russia")}
         >
           Russia
         </button>
         <button
           className="bg-gray-300 border-2 border-black rounded-md m-4 w-[8vw] hover:bg-green-300"
-          onClick={handleShowModal}
+          onClick={() => handleShowModal("united kingdom")}
         >
           England
         </button>
