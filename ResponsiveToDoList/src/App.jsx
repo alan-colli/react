@@ -1,6 +1,8 @@
 import Header from "./components/Header";
 import { useState } from "react";
 import Modal from "./components/Modal";
+import editIcon from "./components/edit.png";
+import trashIcon from "./components/trash-can.png";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
@@ -15,7 +17,10 @@ export default function App() {
       ...prevList,
       { ...task, Number: crypto.randomUUID() },
     ]);
-    console.log(list);
+  };
+
+  const handleDeleteTask = (index) => {
+    setList((prevState) => prevState.filter((_, i) => i !== index));
   };
 
   return (
@@ -27,7 +32,39 @@ export default function App() {
       >
         Add
       </button>
-      <div></div>
+      <div className="w-[90vw] h-[72vh] bg-gray-300 rounded-md flex flex-col space-y-8">
+        {list.length === 0 ? (
+          <div className="w-full h-full flex flex-col justify-center">
+            <p className="flex justify-center">
+              None activity have been added!
+            </p>
+          </div>
+        ) : (
+          list.map((task, index) => (
+            <div
+              key={task.Number}
+              className="flex  mt-8 w-[90vw] justify-between items-center "
+            >
+              <div className="space-y-8 text-base flex flex-row items-center ml-2 ">
+                <p>
+                  {task.Activity}, {task.Week}
+                </p>
+              </div>
+              <div className="flex flex-row mr-2 space-x-4">
+                <button
+                  className=" w-6 flex justify-center items-center "
+                  onClick={() => handleDeleteTask(index)}
+                >
+                  <img src={trashIcon} />
+                </button>
+                <button>
+                  <img src={editIcon} />
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
       {showModal && (
         <Modal setShowModal={setShowModal} handleAttList={handleAttList} />
       )}
