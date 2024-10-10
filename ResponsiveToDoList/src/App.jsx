@@ -1,18 +1,27 @@
 import Header from "./components/Header";
 import { useState } from "react";
 import Modal from "./components/Modal";
-import editIcon from "./components/edit.png";
-import trashIcon from "./components/trash-can.png";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [list, setList] = useState([]);
+  const [edit, setEdit] = useState("");
 
   const handleModalOpen = () => {
     setShowModal(true);
   };
 
   const handleAttList = (task) => {
+    if (edit) {
+      setList((prevList) => {
+        return prevList.map((_task) =>
+          _task.number === edit ? { ..._task, ..._task } : _task
+        );
+      });
+      setEdit("");
+      return;
+    }
+
     setList((prevList) => [
       ...prevList,
       { ...task, Number: crypto.randomUUID() },
@@ -22,6 +31,11 @@ export default function App() {
   const handleDeleteTask = (index) => {
     setList((prevState) => prevState.filter((_, i) => i !== index));
   };
+
+  function handleEdit(id) {
+    setEdit(id);
+    handleModalOpen();
+  }
 
   return (
     <div className="w-[100vw] h-[100vh] flex flex-col items-center justify-start">
@@ -43,22 +57,25 @@ export default function App() {
           list.map((task, index) => (
             <div
               key={task.Number}
-              className="flex  mt-8 w-[90vw] justify-between items-center "
+              className="flex  mt-8 w-[90vw] justify-between items-center bg-gray-800 rounded-md text-white  "
             >
-              <div className="space-y-8 text-base flex flex-row items-center ml-2 ">
+              <div className="space-y-8 text-base flex flex-row items-center ml-2 2xl:text-4xl">
                 <p>
                   {task.Activity}, {task.Week}
                 </p>
               </div>
               <div className="flex flex-row mr-2 space-x-4">
                 <button
-                  className=" w-6 flex justify-center items-center "
+                  className=" w-10 flex justify-center items-center bg-red-600 border-2 border-black hover:bg-red-300 text-white h-[3vh] 2xl:w-[3vw] 2xl:h-[5vh]"
                   onClick={() => handleDeleteTask(index)}
                 >
-                  <img src={trashIcon} />
+                  DEL
                 </button>
-                <button>
-                  <img src={editIcon} />
+                <button
+                  className="w-10 flex justify-center items-center bg-blue-600 border-2 border-black text-white h-[3vh] 2xl:w-[3vw] 2xl:h-[5vh]"
+                  onClick={() => handleEdit(task.Number)}
+                >
+                  EDIT
                 </button>
               </div>
             </div>

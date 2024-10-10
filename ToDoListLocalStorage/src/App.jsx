@@ -33,7 +33,7 @@ export default function App() {
     setEdit(id);
     handleModalOpen();
   }
-  console.log(list);
+
   const handleAttList = (task) => {
     console.log(task);
     console.log(edit);
