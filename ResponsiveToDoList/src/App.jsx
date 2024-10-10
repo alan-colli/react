@@ -1,11 +1,24 @@
 import Header from "./components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./components/Modal";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [list, setList] = useState([]);
   const [edit, setEdit] = useState("");
+
+  useEffect(() => {
+    const listStorage = localStorage.getItem("list");
+    if (listStorage) {
+      setList(JSON.parse(listStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (list.length > 0) {
+      localStorage.setItem("list", JSON.stringify(list));
+    }
+  }, [list]);
 
   const handleModalOpen = () => {
     setShowModal(true);
@@ -15,7 +28,12 @@ export default function App() {
     if (edit) {
       setList((prevList) => {
         return prevList.map((_task) =>
-          _task.number === edit ? { ..._task, ..._task } : _task
+          _task.Number === edit
+            ? {
+                ..._task,
+                ...task,
+              }
+            : _task
         );
       });
       setEdit("");
@@ -59,7 +77,7 @@ export default function App() {
               key={task.Number}
               className="flex  mt-8 w-[90vw] justify-between items-center bg-gray-800 rounded-md text-white  "
             >
-              <div className="space-y-8 text-base flex flex-row items-center ml-2 2xl:text-4xl">
+              <div className="space-y-8 text-base flex flex-row items-center ml-2n xl:text-2xl 2xl:text-4xl">
                 <p>
                   {task.Activity}, {task.Week}
                 </p>
@@ -72,7 +90,7 @@ export default function App() {
                   DEL
                 </button>
                 <button
-                  className="w-10 flex justify-center items-center bg-blue-600 border-2 border-black text-white h-[3vh] 2xl:w-[3vw] 2xl:h-[5vh]"
+                  className="w-10 flex justify-center items-center bg-blue-600 border-2 hover:bg-blue-300 border-black text-white h-[3vh] 2xl:w-[3vw] 2xl:h-[5vh]"
                   onClick={() => handleEdit(task.Number)}
                 >
                   EDIT
