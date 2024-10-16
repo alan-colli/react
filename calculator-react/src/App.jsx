@@ -10,23 +10,43 @@ export default function App() {
   const [operator, setOperator] = useState("");
 
   const handleChangeScreen = (e) => {
-    setValue((prevE) => prevE + e);
-    if (e === "X" || e === "/" || e === "+" || e === "-") {
+    if (e !== "X" && e !== "/" && e !== "+" && e !== "-" && operator === "") {
+      setNum1((prevNum1) => prevNum1 + e);
+      setValue((prevE) => prevE + e);
+      console.log(num1);
+    }
+    if (e !== "X" && e !== "/" && e !== "+" && e !== "-" && operator !== "") {
+      setNum2((prevNum2) => prevNum2 + e);
+      setValue((prevE) => prevE + e);
+      console.log(num2);
+    }
+
+    if ((e === "X" || e === "/" || e === "+" || e === "-") && operator === "") {
       setOperator(e);
-      console.log(operator);
+      setValue((prevE) => prevE + e);
     }
   };
 
-  const handleCalculate = (operator) => {
+  const handleCalculate = () => {
     switch (operator) {
       case "+":
-        return <p>{(value = num1 + num2)}</p>;
+        setValue(Number(num1) + Number(num2));
+        break;
+
       case "-":
-        return <p>{(value = num1 - num2)}</p>;
+        setValue(Number(num1) - Number(num2));
+
+        break;
       case "/":
-        return <p>{(value = num1 / num2)}</p>;
+        setValue(Number(num1) / Number(num2));
+
+        break;
       case "X":
-        return <p>{(value = num1 * num2)}</p>;
+        setValue(Number(num1) * Number(num2));
+
+        break;
+      default:
+        break;
     }
   };
 
@@ -34,6 +54,7 @@ export default function App() {
     setValue("");
     setNum1(0);
     setNum2(0);
+    setOperator("");
   };
 
   const handleDeleteNumber = () => {

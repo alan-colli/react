@@ -18,13 +18,13 @@ export default function Keyboard({
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={8}
-            onClick={() => handleChangeScreen(8)}
+            onClick={() => handleChangeScreen("8")}
           />
           <input
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={9}
-            onClick={() => handleChangeScreen(9)}
+            onClick={() => handleChangeScreen("9")}
           />
           <input
             type="button"
@@ -36,19 +36,19 @@ export default function Keyboard({
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={4}
-            onClick={() => handleChangeScreen(4)}
+            onClick={() => handleChangeScreen("4")}
           />
           <input
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={5}
-            onClick={() => handleChangeScreen(5)}
+            onClick={() => handleChangeScreen("5")}
           />
           <input
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={6}
-            onClick={() => handleChangeScreen(6)}
+            onClick={() => handleChangeScreen("6")}
           />
           <input
             type="button"
@@ -60,19 +60,19 @@ export default function Keyboard({
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={1}
-            onClick={() => handleChangeScreen(1)}
+            onClick={() => handleChangeScreen("1")}
           />
           <input
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={2}
-            onClick={() => handleChangeScreen(2)}
+            onClick={() => handleChangeScreen("2")}
           />
           <input
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={3}
-            onClick={() => handleChangeScreen(3)}
+            onClick={() => handleChangeScreen("3")}
           />
           <input
             type="button"
@@ -90,7 +90,7 @@ export default function Keyboard({
             type="button"
             className="bg-blue-200 w-12 h-12 rounded-md text-xl"
             value={0}
-            onClick={() => handleChangeScreen(0)}
+            onClick={() => handleChangeScreen("0")}
           />
           <input
             type="button"
