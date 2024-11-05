@@ -9,14 +9,16 @@ function App() {
 
   const handleSaveProducts = (product) => {
     setProducts((prevList) => [...prevList, product]);
-    sendDataToBackEnd();
+    sendDataToBackEnd(product);
   };
 
-  const sendDataToBackEnd = async () => {
+  const sendDataToBackEnd = async (product) => {
+    console.log(product);
     try {
-      const res = await axios.post("http://localhost:3333/products", {
-        products,
-      });
+      const res = await axios.post("http://localhost:3333/products", product);
+      if (res.status === 200) {
+        alert("Data has been sent");
+      }
     } catch (error) {
       alert("Couldnt send data!" + error.message);
     }

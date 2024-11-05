@@ -40,7 +40,9 @@ export default function Modal({ handleModal, handleSaveProducts }) {
         <input
           type="number"
           className="rounded-md w-24 pl-4"
-          onChange={(e) => setProduct({ ...product, price: e.target.value })}
+          onChange={(e) =>
+            setProduct({ ...product, price: Number(e.target.value) })
+          }
         />
 
         <div className="flex justify-center items-center space-x-32 pt-12">
