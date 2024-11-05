@@ -6,10 +6,16 @@ import Modal from "./Modal";
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const handleSaveProducts = (product) => {
-    setProducts((prevList) => [...prevList, product]);
-    sendDataToBackEnd(product);
+  const handleSaveProducts = async (product) => {
+    if (product._id) {
+      await editProduct(product);
+    } else {
+      const res = await axios.post("http://localhost:3333/products", product);
+      setProducts((prevProducts) => [...prevProducts, res.data]);
+    }
+    setShowModal(false);
   };
 
   const sendDataToBackEnd = async (product) => {
@@ -52,6 +58,32 @@ function App() {
     }
   };
 
+  const editProduct = async (updateProduct) => {
+    try {
+      const res = await axios.put(
+        ` http://localhost:3333/products/${updateProduct._id}`,
+        updateProduct
+      );
+
+      if (res.status === 200) {
+        alert("Product has been edited!");
+
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product._id === updateProduct._id ? updateProduct : product
+          )
+        );
+      }
+    } catch (error) {
+      alert("Couldn't edited!", error.message);
+    }
+  };
+
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -79,7 +111,10 @@ function App() {
               <p className="font-semibold">Preço: R$ {product.price}</p>
             </div>
             <div className="flex flex-col justify-center space-y-4">
-              <button className="border-2 border-gray-300 rounded-md bg-blue-400 text-white">
+              <button
+                className="border-2 border-gray-300 rounded-md bg-blue-400 text-white"
+                onClick={() => handleEditClick(product)}
+              >
                 Edit
               </button>
               <button
@@ -96,6 +131,7 @@ function App() {
         <Modal
           handleModal={handleModal}
           handleSaveProducts={handleSaveProducts}
+          selectedProduct={selectedProduct}
         />
       )}
     </div>

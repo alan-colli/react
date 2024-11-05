@@ -1,14 +1,20 @@
 import { useState } from "react";
 
-export default function Modal({ handleModal, handleSaveProducts }) {
-  const [product, setProduct] = useState({
-    title: "",
-    description: "",
-    price: 0,
-  });
+export default function Modal({
+  handleModal,
+  handleSaveProducts,
+  selectedProduct,
+}) {
+  const [product, setProduct] = useState(
+    selectedProduct || {
+      title: "",
+      description: "",
+      price: 0,
+    }
+  );
 
   const saveProduct = () => {
-    handleSaveProducts(product);
+    handleSaveProducts({ ...product, _id: selectedProduct?._id });
     handleModal();
   };
 
