@@ -42,7 +42,7 @@ export const updateProduct = async (product) => {
   }
 };
 
-//Vizualizar tabela Products
+// Vizualizar tabela Products
 export const showProducts = async () => {
   try {
     const db = await openDb();
@@ -53,16 +53,27 @@ export const showProducts = async () => {
   }
 };
 
-//Excluir dados da tabela
+// Excluir dados da tabela
+// product.js
 export const deleteProduct = async (id) => {
   try {
     const db = await openDb();
     console.log("Tentando excluir o produto com id:", id);
+
+    // Verifica se o produto existe antes de tentar excluir
+    const product = await db.get("SELECT * FROM Product WHERE id = ?", [id]);
+    if (!product) {
+      console.log("Produto não encontrado com o id:", id);
+      return false;
+    }
+
+    // Tenta deletar o produto
     const result = await db.run("DELETE FROM Product WHERE id = ?", [id]);
+    console.log(`Número de registros deletados: ${result.changes}`);
 
     return result.changes > 0;
   } catch (error) {
-    console.error("Error to exclude product!", error.message);
+    console.error("Error ao excluir produto!", error.message);
     throw error;
   }
 };

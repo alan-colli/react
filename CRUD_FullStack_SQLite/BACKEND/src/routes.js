@@ -49,15 +49,16 @@ routes.get("/products", async (req, res) => {
   }
 });
 
-routes.delete("/products", async (req, res) => {
-  const { id } = req.body;
+routes.delete("/products/:id", async (req, res) => {
+  const { id } = req.params; // O ID agora vem pela URL
+  console.log("ID recebido:", id); // Verifique o valor do ID
 
-  if (!id) {
-    return res.status(400).json({ msg: "You need an id!" });
+  if (!id || isNaN(id)) {
+    return res.status(400).json({ msg: "Invalid ID!" });
   }
 
   try {
-    const wasDeleted = await deleteProduct(id);
+    const wasDeleted = await deleteProduct(id); // Tenta excluir o produto
     if (wasDeleted) {
       res.status(200).json({ message: "Product excluded successfully!" });
     } else {
