@@ -20,6 +20,34 @@ function App() {
     getDataFromBackend();
   }, []);
 
+  const handleSaveProducts = async (product) => {
+    if (product.id) {
+      await editProduct(product);
+    } else {
+      const res = await axios.post("http://localhost:3002/products", product);
+      setProducts((prevProducts) => [...prevProducts, res.data]);
+    }
+  };
+
+  const editProduct = async (updateProduct) => {
+    try {
+      const res = await axios.put(
+        `http://localhost:3002/products/${updateProduct.id}`,
+        updateProduct
+      );
+
+      if (res.status === 200) {
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === updateProduct.id ? updateProduct : product
+          )
+        );
+      }
+    } catch (error) {
+      alert("Couldnt edited!", error.message);
+    }
+  };
+
   const deleteProduct = async (id) => {
     try {
       const res = await axios.delete(`http://localhost:3002/products/${id}`);
@@ -38,7 +66,7 @@ function App() {
 
   const handleEditClick = (product) => {
     setSelectedProduct(product);
-    setShowModal(true);
+    handleModalOpen();
   };
 
   const handleModalOpen = () => {
@@ -67,7 +95,10 @@ function App() {
               <p>Price: {product.price}</p>
             </div>
             <div className="mr-4 flex flex-col justify-center space-y-2 ">
-              <button className="bg-blue-400 text-white rounded-md w-16 hover:scale-110">
+              <button
+                className="bg-blue-400 text-white rounded-md w-16 hover:scale-110"
+                onClick={() => handleEditClick(product)}
+              >
                 EDIT
               </button>
               <button
@@ -81,7 +112,13 @@ function App() {
         ))}
       </ul>
 
-      {showModal && <Modal handleModalOpen={handleModalOpen} />}
+      {showModal && (
+        <Modal
+          handleModalOpen={handleModalOpen}
+          handleSaveProducts={handleSaveProducts}
+          selectedProduct={selectedProduct}
+        />
+      )}
     </div>
   );
 }

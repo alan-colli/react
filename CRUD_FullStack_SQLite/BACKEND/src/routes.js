@@ -20,15 +20,18 @@ routes.post("/products", async (req, res) => {
   }
 });
 
-routes.put("/products", async (req, res) => {
-  if (req.body && !req.body.id) {
+routes.put("/products/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
     return res.status(400).json({
       msg: "You need an id!",
     });
   }
 
   try {
-    await updateProduct(req.body);
+    const updatedProduct = req.body; // Dados do produto que serão atualizados
+    await updateProduct({ id, ...updatedProduct }); // Incluindo o id na atualização
     res.status(200).json({ message: "Product updated successfully!" });
   } catch (error) {
     res
