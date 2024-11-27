@@ -17,4 +17,4 @@ import openDb from "./cfgDB.js";
 //   }
 // })();
 
-app.listen(3007, () => console.log("Server is running!"));
+app.listen(3008, () => console.log("Server is running!"));
