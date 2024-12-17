@@ -55,3 +55,18 @@ export const editContact = async (contact) => {
     console.error("Error to update", error.message);
   }
 };
+
+export const findContactByName = async (first_name) => {
+  try {
+    const db = await openDb();
+    const query = `SELECT * FROM contacts WHERE  first_name = ? OR first_name LIKE ? OR first_name LIKE ?`;
+    const people = await db.all(query, [
+      first_name, // Exactly
+      `${first_name} %`, // Starts with
+      `% ${first_name}`, // Ends with
+    ]);
+    return people;
+  } catch (error) {
+    console.error("Error to search people!", error.message);
+  }
+};

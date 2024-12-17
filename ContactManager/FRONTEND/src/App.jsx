@@ -47,17 +47,39 @@ function App() {
           />
         </button>
       </div>
-      {contacts.map((contact) => {
-        <li key={contact.id} className="flex w-[40vw] h-[50v]">
-          <div>
-            <p>
-              {contact.first_name}
-              {contact.last_name}
-            </p>
-            <p>{contact.phone_number}</p>
-          </div>
-        </li>;
-      })}
+      <ul className="h-[70vh] w-[90vw] flex flex-col justify-start items-center bg-gray-300 mt-4 rounded-md overflow-y-auto">
+        {contacts.map((contact) => {
+          return (
+            <li
+              key={contact.id}
+              className="flex w-[85vw] h-[20vh] bg-gray-600 text-white m-2 rounded-md p-2 items-center"
+            >
+              <div className="flex-1">
+                <p className="font-bold text-xl">
+                  {contact.first_name} {contact.last_name}
+                </p>
+                <p>{contact.phone_number}</p>
+              </div>
+              <div className="space-y-2 flex justify-center items-center flex-col">
+                <button className="bg-red-600 border-1 rounded-full w-8 h-8 flex justify-center items-center">
+                  <img
+                    src="./src/public/trash.png"
+                    alt="trash icon"
+                    className="w-6"
+                  />
+                </button>
+                <button className="bg-blue-600 border-1 rounded-full w-8 h-8 flex justify-center items-center">
+                  <img
+                    src="./src/public/botao-editar.png"
+                    alt="edit icon"
+                    className="w-6"
+                  />
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
 
       {modalToAdd && <ModalToAdd handleModalToAdd={handleModalToAdd} />}
     </div>

@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   deleteContact,
   editContact,
+  findContactByName,
   insertContact,
   showContacts,
 } from "./controller/contacts.js";
@@ -81,6 +82,16 @@ routes.put("/contacts/:id", async (req, res) => {
     res.status(200).json({ message: "Contact updated succesfully!" });
   } catch (error) {
     res.status(500).json({ message: "Error to update", error: error.message });
+  }
+});
+
+routes.get("/contacts/search", async (req, res) => {
+  const { first_name } = req.query;
+  try {
+    const results = await findContactByName(first_name || "");
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: "Error to search contact by name!" });
   }
 });
 
