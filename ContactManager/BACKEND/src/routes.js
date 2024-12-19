@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   deleteContact,
   editContact,
+  findContactById,
   findContactByName,
   insertContact,
   showContacts,
@@ -95,4 +96,18 @@ routes.get("/contacts/search", async (req, res) => {
   }
 });
 
+routes.get("/contacts/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const contact = await findContactById(id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+    res.status(200).json(contact);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching contact by ID", error: error.message });
+  }
+});
 export default routes;

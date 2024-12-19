@@ -70,3 +70,13 @@ export const findContactByName = async (first_name) => {
     console.error("Error to search people!", error.message);
   }
 };
+
+export const findContactById = async (id) => {
+  try {
+    const db = await openDb();
+    const contact = await db.get("SELECT * FROM contacts WHERE id=?", [id]);
+    return contact;
+  } catch (error) {
+    console.error("Error to found people by ID", error.message);
+  }
+};

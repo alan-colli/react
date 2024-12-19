@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import CountryCard from "./components/CountryCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function App() {
