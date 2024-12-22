@@ -96,6 +96,27 @@ function App() {
     }
   };
 
+  const handleSearchContact = async () => {
+    const name = searchName.trim();
+    if (!name) {
+      alert("Please enter a name to search!");
+      return;
+    }
+    try {
+      const res = await axios.get(
+        `http://localhost:7777/contacts/search?first_name=${name}`
+      );
+      if (res.data.length === 0) {
+        alert("No contacts found!");
+        setContacts([]);
+      } else {
+        setContacts(res.data);
+      }
+    } catch (error) {
+      alert("Error to search by the name!", error.message);
+    }
+  };
+
   return (
     <div className="bg-gray-100  flex items-center h-[100vh] flex-col w-[100vw]">
       <Header />
@@ -110,21 +131,23 @@ function App() {
           type="text"
           placeholder="Search by name..."
           className="rounded-md pl-2"
+          onChange={(e) => setSearchName(e.target.value)}
         />
         <button>
           <img
             src="./src/public/magnifying-glass (1).png"
             alt="magnifying glass image"
             className="w-4"
+            onClick={handleSearchContact}
           />
         </button>
       </div>
-      <ul className="h-[70vh] w-[90vw] flex flex-col justify-start items-center bg-gray-300 mt-4 rounded-md overflow-y-auto">
+      <ul className="h-[70vh] w-[90vw] flex flex-col justify-start items-center bg-gray-300 mt-4 rounded-md overflow-y-auto ">
         {contacts.map((contact) => {
           return (
             <li
               key={contact.id}
-              className="flex w-[85vw] h-[20vh] bg-gray-600 text-white m-2 rounded-md p-2 items-center"
+              className="flex w-[85vw] h-[20vh] bg-gray-600 text-white m-2 rounded-md p-2 items-center mb-8"
             >
               <div className="flex-1">
                 <p className="font-bold text-xl">

@@ -59,12 +59,8 @@ export const editContact = async (contact) => {
 export const findContactByName = async (first_name) => {
   try {
     const db = await openDb();
-    const query = `SELECT * FROM contacts WHERE  first_name = ? OR first_name LIKE ? OR first_name LIKE ?`;
-    const people = await db.all(query, [
-      first_name, // Exactly
-      `${first_name} %`, // Starts with
-      `% ${first_name}`, // Ends with
-    ]);
+    const query = `SELECT * FROM contacts WHERE first_name LIKE ?`;
+    const people = await db.all(query, [`%${first_name}%`]); // Busca em qualquer posição
     return people;
   } catch (error) {
     console.error("Error to search people!", error.message);
