@@ -99,15 +99,15 @@ function App() {
   const handleSearchContact = async () => {
     const name = searchName;
     if (!name) {
-      alert("Please enter a name to search!");
-      return;
+      const res = await axios.get("http://localhost:7777/contacts");
+      setContacts(res.data);
     }
 
     try {
       const res = await axios.get(
         `http://localhost:7777/contacts/search?first_name=${name}`
       );
-      console.log(res.data);
+
       if (res.data.length === 0) {
         alert("No contacts found!");
         setContacts([]);
