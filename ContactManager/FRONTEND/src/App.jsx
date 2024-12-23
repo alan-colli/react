@@ -97,15 +97,17 @@ function App() {
   };
 
   const handleSearchContact = async () => {
-    const name = searchName.trim();
+    const name = searchName;
     if (!name) {
       alert("Please enter a name to search!");
       return;
     }
+
     try {
       const res = await axios.get(
         `http://localhost:7777/contacts/search?first_name=${name}`
       );
+      console.log(res.data);
       if (res.data.length === 0) {
         alert("No contacts found!");
         setContacts([]);
