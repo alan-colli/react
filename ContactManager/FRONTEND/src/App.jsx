@@ -75,7 +75,7 @@ function App() {
       }
     };
     getDataFromBackend();
-  }, [contacts]);
+  }, []);
 
   //Deleting a contact
   const deleteContact = async (id) => {
