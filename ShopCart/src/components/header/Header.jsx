@@ -11,10 +11,11 @@ export default function Header() {
 
   return (
     <div className="flex justify-between w-full h-[8vh] items-center p-4 bg-blue-300">
-      <p className="font-bold text-3xl">Store</p>
       <button>
         <img src={cartImage} alt="cart image" onClick={handleCartModal} />
       </button>
+      <p className="font-bold text-3xl">StoreCart</p>
+
       {cartModal && <CartModal handleCartModal={handleCartModal} />}
     </div>
   );
