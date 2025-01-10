@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex justify-between w-full h-[8vh] items-center p-4 bg-blue-300">
+    <div className="flex justify-between w-[100vw] h-[8vh] items-center p-4 bg-blue-300 sticky top-0">
       <button>
         <img src={cartImage} alt="cart image" onClick={handleCartModal} />
       </button>

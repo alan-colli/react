@@ -1,11 +1,12 @@
 import Header from "./components/header/Header.jsx";
-import HomePage from "./components/homePage/HomePage.jsx";
+import ProductsPage from "./components/productsPage/ProductsPage.jsx";
+import { Products } from "./ProductsList.js";
 
 function App() {
   return (
-    <div className="w-[100vw] h-[100vh] flex flex-col justify-center">
+    <div className="w-[100vw] h-[100vh] flex flex-col  ">
       <Header />
-      <HomePage />
+      <ProductsPage />
     </div>
   );
 }
