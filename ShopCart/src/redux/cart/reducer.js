@@ -8,10 +8,37 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case CartActionType.ADD_PRODUCT:
+      //verify if the product already in cart
+      const productIsAlreadyInCart = state.products.some(
+        (product) => product.id === action.payload.id
+      );
+
+      //increase quantity if is
+      if (productIsAlreadyInCart) {
+        return {
+          ...state,
+          products: state.products.map((product) =>
+            product.id === action.payload.id
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
+          ),
+        };
+      }
+
+      //if not, add
       return {
         ...state,
-        products: [...state.products, action.payload],
+        products: [...state.products, { ...action.payload, quantity: 1 }],
       };
+
+    case CartActionType.REMOVE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.payload
+        ),
+      };
+
     default:
       return state;
   }
