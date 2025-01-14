@@ -1,3 +1,10 @@
+import { useDispatch } from "react-redux";
+import {
+  removeProductFromCart,
+  increaseProduct,
+  decreaseProduct,
+} from "../../redux/cart/actions";
+
 export default function CartItem({
   product,
   handleProductClick,
@@ -5,6 +12,20 @@ export default function CartItem({
   showQuantityCartProduct = false,
   showRemoveButton = false,
 }) {
+  const dispatch = useDispatch();
+
+  const handleRemoveClick = () => {
+    dispatch(removeProductFromCart(product.id));
+  };
+
+  const handleIncreaseProductQuantity = () => {
+    dispatch(increaseProduct(product.id));
+  };
+
+  const handleDecreaseProductQuantity = () => {
+    dispatch(decreaseProduct(product.id));
+  };
+
   return (
     <div
       className="flex justify-start m-4 border-2 border-gray-300 flex-col items-center"
@@ -13,7 +34,10 @@ export default function CartItem({
       <div>
         {showRemoveButton && (
           <div>
-            <button className="bg-red-600 w-16 rounded-md text-white mt-2">
+            <button
+              className="bg-red-600 w-16 rounded-md text-white mt-2"
+              onClick={handleRemoveClick}
+            >
               REMOVE
             </button>
           </div>
@@ -35,11 +59,17 @@ export default function CartItem({
           )}
           {showQuantityCartProduct && (
             <div className="flex space-x-4 mt-2 items-center justify-center ">
-              <button className="bg-blue-300 w-4 h-4 items-center justify-center flex rounded-sm border-1 border-black">
+              <button
+                className="bg-blue-300 w-4 h-4 items-center justify-center flex rounded-sm border-1 border-black"
+                onClick={handleDecreaseProductQuantity}
+              >
                 -
               </button>
               <p>{product.quantity}</p>
-              <button className="bg-blue-300 w-4 h-4 items-center justify-center flex rounded-sm border-1 border-black">
+              <button
+                className="bg-blue-300 w-4 h-4 items-center justify-center flex rounded-sm border-1 border-black"
+                onClick={handleIncreaseProductQuantity}
+              >
                 +
               </button>
             </div>

@@ -2,7 +2,6 @@ import CartActionType from "./actionType";
 
 const initialState = {
   products: [],
-  productsTotalPrice: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -37,6 +36,28 @@ const cartReducer = (state = initialState, action) => {
         products: state.products.filter(
           (product) => product.id !== action.payload
         ),
+      };
+
+    case CartActionType.INCREASE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          product.id === action.payload
+            ? { ...product, quantity: product.quantity + 1 }
+            : product
+        ),
+      };
+
+    case CartActionType.DESCREASE_PRODUCT:
+      return {
+        ...state,
+        products: state.products
+          .map((product) =>
+            product.id === action.payload
+              ? { ...product, quantity: product.quantity - 1 }
+              : product
+          )
+          .filter((product) => product.quantity > 0),
       };
 
     default:

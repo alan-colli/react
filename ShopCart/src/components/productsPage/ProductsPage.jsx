@@ -14,6 +14,7 @@ export default function ProductsPage() {
     <div className="w-[100vw] h-[100vh] ">
       {Products.map((product) => (
         <CartItem
+          key={product.id}
           product={product}
           handleProductClick={handleProductClick}
           showBuyButton
