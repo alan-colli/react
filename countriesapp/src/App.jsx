@@ -20,9 +20,9 @@ function App() {
   const handleNameCountry = () => {};
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-blue-950 flex flex-col items-center">
+    <div className="w-screen h-[100vh] bg-blue-950 flex flex-col items-center">
       <Header />
-      <p className="text-gray-200 mt-6">Type a country: </p>
+      <p className="text-gray-200 mt-6 lg:text-6xl">Type a country: </p>
       <form
         className="flex space-x-14 text-gray-100 bg-gray-200 rounded-md mt-6"
         onSubmit={(event) => {
@@ -31,12 +31,15 @@ function App() {
           search(countryName);
         }}
       >
-        <input type="text" className="rounded-md bg-gray-200 text-black pl-4" />
+        <input
+          type="text"
+          className="rounded-md bg-gray-200 text-black pl-2 h-8 lg:w-[30vw] lg:h-32 lg:text-7xl"
+        />
         <button onClick={handleNameCountry}>
           <img
             src="/glass.png"
             alt="search photo"
-            className="w-4 bg-gray-200 rounded-sm"
+            className="w-6 lg:w-24 bg-gray-200 rounded-sm"
           />
         </button>
       </form>

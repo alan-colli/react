@@ -9,7 +9,6 @@ export default function CountryCard({ country }) {
 
   return (
     <div className="bg-gray-200 rounded-lg shadow-lg w-[90vw] md:w-[70vw] lg:w-[60vw] mt-8 flex flex-col md:flex-row overflow-hidden">
-      {/* Flag image */}
       <div className="w-full md:w-1/2">
         <img
           src={country.flags.png}
@@ -18,23 +17,23 @@ export default function CountryCard({ country }) {
         />
       </div>
 
-      {/* Country infos */}
       <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:text-7xl">
           {country.name?.common}
         </h2>
-        <p className="text-lg font-medium text-gray-700 mb-2">
-          <span className="font-bold">Capital:</span> {country.capital?.[0]}
+        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-6xl">
+          <span className="font-bold lg:text-6xl">Capital:</span>{" "}
+          {country.capital?.[0]}
         </p>
-        <p className="text-lg font-medium text-gray-700 mb-2">
-          <span className="font-bold">Continent:</span>{" "}
+        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-6xl">
+          <span className="font-bold lg:text-6xl">Continent:</span>{" "}
           {country.continents?.[0]}
         </p>
-        <p className="text-lg font-medium text-gray-700 mb-2">
-          <span className="font-bold">Population:</span>{" "}
+        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-6xl">
+          <span className="font-bold lg:text-6xl">Population:</span>{" "}
           {country.population.toLocaleString("pt-BR")}
         </p>
-        <p className="text-lg font-medium text-gray-700">
+        <p className="text-lg font-medium text-gray-700 lg:text-6xl">
           <span className="font-bold">Language:</span>{" "}
           {country.languages
             ? Object.values(country.languages).join(", ")
