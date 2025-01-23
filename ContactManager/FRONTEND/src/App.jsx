@@ -96,6 +96,7 @@ function App() {
     }
   };
 
+  //Searching contact
   const handleSearchContact = async () => {
     const name = searchName;
     if (!name) {
@@ -110,9 +111,10 @@ function App() {
 
       if (res.data.length === 0) {
         alert("No contacts found!");
-        setContacts([]);
+        setContacts(contacts);
       } else {
         setContacts(res.data);
+        console.log(res.data);
       }
     } catch (error) {
       alert("Error to search by the name!", error.message);
@@ -120,70 +122,74 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-100  flex items-center h-[100vh] flex-col w-[100vw]">
+    <div className="bg-gray-100 flex items-center h-screen flex-col w-screen">
       <Header />
+
+      {/* Add Contact Button */}
       <button
-        className="flex justify-center items-center bg-blue-950 text-gray-100 w-8 h-8 rounded-full  mt-6 text-3xl"
+        className="flex justify-center items-center bg-blue-950 text-gray-100 w-12 h-12 rounded-full mt-6 text-2xl lg:text-8xl lg:w-32 lg:h-32"
         onClick={handleModalToAdd}
       >
         +
       </button>
-      <div className="bg-white rounded-md w-52 justify-between flex items-center mt-4">
+
+      {/* Search Field */}
+      <div className="bg-white rounded-md w-[90%] max-w-5xl flex justify-between items-center mt-4 p-2 lg:h-20">
         <input
           type="text"
           placeholder="Search by name..."
-          className="rounded-md pl-2"
+          className="flex-1 rounded-md pl-2  lg:text-4xl"
           onChange={(e) => setSearchName(e.target.value)}
         />
-        <button>
+        <button onClick={handleSearchContact}>
           <img
             src="./src/public/magnifying-glass (1).png"
-            alt="magnifying glass image"
-            className="w-4"
-            onClick={handleSearchContact}
+            alt="magnifying glass"
+            className="w-6 lg:w-14"
           />
         </button>
       </div>
-      <ul className="h-[70vh] w-[90vw] flex flex-col justify-start items-center bg-gray-300 mt-4 rounded-md overflow-y-auto ">
-        {contacts.map((contact) => {
-          return (
-            <li
-              key={contact.id}
-              className="flex w-[85vw] h-[20vh] bg-gray-600 text-white m-2 rounded-md p-2 items-center mb-8"
-            >
-              <div className="flex-1">
-                <p className="font-bold text-xl">
-                  {contact.first_name} {contact.last_name}
-                </p>
-                <p>{contact.phone_number}</p>
-              </div>
-              <div className="space-y-2 flex justify-center items-center flex-col">
-                <button
-                  className="bg-red-600 border-1 rounded-full w-8 h-8 flex justify-center items-center"
-                  onClick={() => deleteContact(contact.id)}
-                >
-                  <img
-                    src="./src/public/trash.png"
-                    alt="trash icon"
-                    className="w-6"
-                  />
-                </button>
-                <button
-                  className="bg-blue-600 border-1 rounded-full w-8 h-8 flex justify-center items-center"
-                  onClick={() => handleUpdateContact(contact.id)}
-                >
-                  <img
-                    src="./src/public/botao-editar.png"
-                    alt="edit icon"
-                    className="w-6"
-                  />
-                </button>
-              </div>
-            </li>
-          );
-        })}
+
+      {/* Contact List */}
+      <ul className="h-[60vh] w-[90%] max-w-7xl flex flex-col justify-start items-center bg-gray-300 mt-4 rounded-md overflow-y-auto">
+        {contacts.map((contact) => (
+          <li
+            key={contact.id}
+            className="flex w-[95%] max-w-7xl h-auto bg-gray-600 text-white my-2 rounded-md p-4 items-center"
+          >
+            <div className="flex-1">
+              <p className="font-bold text-lg lg:text-5xl">
+                {contact.first_name} {contact.last_name}
+              </p>
+              <p className="text-md lg:text-4xl">{contact.phone_number}</p>
+            </div>
+            <div className="space-x-2 flex justify-center items-center">
+              <button
+                className="bg-red-600 rounded-full w-8 h-8 lg:w-24 lg:h-24 flex justify-center items-center"
+                onClick={() => deleteContact(contact.id)}
+              >
+                <img
+                  src="./src/public/trash.png"
+                  alt="trash icon"
+                  className="w-6 lg:w-12"
+                />
+              </button>
+              <button
+                className="bg-blue-600 rounded-full w-8 h-8 lg:w-24 lg:h-24 flex justify-center items-center"
+                onClick={() => handleUpdateContact(contact.id)}
+              >
+                <img
+                  src="./src/public/botao-editar.png"
+                  alt="edit icon"
+                  className="w-6 lg:w-12"
+                />
+              </button>
+            </div>
+          </li>
+        ))}
       </ul>
 
+      {/* Modals */}
       {modalToAdd && (
         <ModalToAdd
           handleModalToAdd={handleModalToAdd}
@@ -201,4 +207,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

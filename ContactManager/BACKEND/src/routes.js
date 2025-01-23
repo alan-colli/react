@@ -25,7 +25,8 @@ routes.post("/contacts", async (req, res) => {
   }
   try {
     const contact = { first_name, last_name, phone_number };
-    await insertContact(contact);
+    const addedContact = await insertContact(contact);
+    return res.status(201).json(addedContact);
   } catch (error) {
     res
       .status(500)

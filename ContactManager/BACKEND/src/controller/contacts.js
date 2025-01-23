@@ -7,7 +7,14 @@ export const insertContact = async (contact) => {
       "INSERT INTO contacts (first_name, last_name, phone_number) VALUES (?,?,?)",
       [contact.first_name, contact.last_name, contact.phone_number]
     );
+    const newContact = await db.get(
+      `SELECT *
+      FROM contacts
+      WHERE rowid = last_insert_rowid()`
+    );
+    console.log(newContact);
     console.log("Contact insert succesfully!");
+    return newContact;
   } catch (error) {
     console.error("Error to insert contact", error.message);
   }
@@ -17,6 +24,7 @@ export const showContacts = async () => {
   try {
     const db = await openDb();
     const contacts = await db.all("SELECT * FROM contacts");
+
     return contacts;
   } catch (error) {
     console.error("Error to show contacts!", error.message);
