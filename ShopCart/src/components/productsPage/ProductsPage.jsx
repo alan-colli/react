@@ -11,7 +11,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] ">
+    <div className="w-[100vw] h-[100vh] lg:grid lg:grid-cols-3 items-center justify-center lg:pl-24">
       {Products.map((product) => (
         <CartItem
           key={product.id}
