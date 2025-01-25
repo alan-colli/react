@@ -1,14 +1,14 @@
 export default function CountryCard({ country }) {
-  if (!country || !country.flags) {
+  if (!country || !country.flag) {
     return (
-      <p className="text-gray-200 mt-8 text-center">
+      <p className="text-gray-200 mt-96 text-center  lg:text-8xl">
         No country selected. Please search for a country.
       </p>
     );
   }
 
   return (
-    <div className="bg-gray-200 rounded-lg shadow-lg w-[90vw] md:w-[70vw] lg:w-[60vw] mt-8 flex flex-col md:flex-row overflow-hidden">
+    <div className="bg-gray-200 rounded-lg shadow-lg w-[90vw] md:w-[70vw] lg:w-[60vw] mt-8 flex flex-col md:flex-row overflow-hidden ">
       <div className="w-full md:w-1/2">
         <img
           src={country.flags.png}
@@ -17,7 +17,7 @@ export default function CountryCard({ country }) {
         />
       </div>
 
-      <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
+      <div className="w-full md:w-1/2 p-6 flex flex-col justify-center lg:space-y-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:text-7xl">
           {country.name?.common}
         </h2>

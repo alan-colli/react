@@ -7,17 +7,21 @@ function App() {
   const [country, setCountry] = useState({});
 
   const search = async (countryName) => {
+    if (!countryName.trim()) {
+      setCountry({});
+      return;
+    }
+
     try {
       const { data } = await axios.get(
         `https://restcountries.com/v3.1/name/${countryName}`
       );
-      setCountry(data[0]); // Define apenas o primeiro país retornado
+      setCountry(data[0]);
     } catch (error) {
       console.error("Error to find data", error);
+      setCountry({});
     }
   };
-
-  const handleNameCountry = () => {};
 
   return (
     <div className="w-screen h-[100vh] bg-blue-950 flex flex-col items-center">
@@ -27,15 +31,15 @@ function App() {
         className="flex space-x-14 text-gray-100 bg-gray-200 rounded-md mt-6"
         onSubmit={(event) => {
           event.preventDefault();
-          const countryName = event.target[0].value; // Captura o valor do input
-          search(countryName);
+          const countryName = event.target[0].value;
+          search(countryName); // Chama a busca diretamente
         }}
       >
         <input
           type="text"
           className="rounded-md bg-gray-200 text-black pl-2 h-8 lg:w-[30vw] lg:h-32 lg:text-7xl"
         />
-        <button onClick={handleNameCountry}>
+        <button type="submit">
           <img
             src="/glass.png"
             alt="search photo"
@@ -43,6 +47,7 @@ function App() {
           />
         </button>
       </form>
+
       <CountryCard country={country} />
     </div>
   );
