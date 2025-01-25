@@ -52,9 +52,18 @@ export default function ModalToAdd({ handleModalToAdd, handleSaveContact }) {
             className="w-40 pl-2 lg:w-[12vw] lg:h-16 lg:text-5xl"
             placeholder="XX-XXXXXXXXX"
             value={addContact.phone_number}
-            onChange={(e) =>
-              setAddContact({ ...addContact, phone_number: e.target.value })
-            }
+            onChange={(e) => {
+              let value = e.target.value.replace(/\D/g, "");
+              if (value.length <= 2) {
+                value = value.replace(/(\d{2})(\d{0,4})/, "$1-$2");
+              } else if (value.length <= 6) {
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "$1-$2 $3");
+              } else {
+                value = value.slice(0, 10);
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "$1-$2 $3");
+              }
+              setAddContact({ ...addContact, phone_number: value });
+            }}
           />
         </div>
         <button

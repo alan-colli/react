@@ -56,14 +56,23 @@ export default function ModalToEdit({
           <input
             type="text"
             className="w-40 pl-2 lg:w-[12vw] lg:h-16 lg:text-5xl"
-            placeholder="XX-XXXXXXXXX"
+            placeholder="XX-XXXX XXXX"
             value={editedContact?.phone_number}
-            onChange={(e) =>
+            onChange={(e) => {
+              let value = e.target.value.replace(/\D/g, "");
+              if (value.length <= 2) {
+                value = value.replace(/(\d{2})(\d{0,4})/, "$1-$2");
+              } else if (value.length <= 6) {
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "$1-$2 $3");
+              } else {
+                value = value.slice(0, 10);
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "$1-$2 $3");
+              }
               setEditedContact((prev) => ({
                 ...prev,
-                phone_number: e.target.value,
-              }))
-            }
+                phone_number: value,
+              }));
+            }}
           />
         </div>
         <button

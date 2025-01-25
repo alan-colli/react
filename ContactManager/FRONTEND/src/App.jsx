@@ -10,6 +10,14 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [contactToEdit, setContactToEdit] = useState({});
   const [searchName, setSearchName] = useState("");
+  const [notification, setNotification] = useState("");
+
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => {
+      setNotification(""); // Esconde a notificação após 3 segundos
+    }, 3000);
+  };
 
   const handleModalToAdd = () => {
     setModalToOpen(!modalToAdd);
@@ -39,6 +47,7 @@ function App() {
         updatedContact
       );
       console.log("Contact updated succesfully: ", res.data);
+      showNotification("Contact updated!");
 
       setContacts((prevContacts) =>
         prevContacts.map((contact) =>
@@ -59,6 +68,7 @@ function App() {
         phone_number: person.phone_number,
       });
       setContacts((prevContacts) => [...prevContacts, res.data]);
+      showNotification("Contact created!");
     } catch (error) {
       console.error("Error to save contact!", error.message);
     }
@@ -80,7 +90,7 @@ function App() {
   //Deleting a contact
   const deleteContact = async (id) => {
     if (!id) {
-      alert("ID is missing!");
+      showNotification("ID is missing!");
       return;
     }
     try {
@@ -89,10 +99,10 @@ function App() {
         setContacts((prevContacts) =>
           prevContacts.filter((contact) => contact.id !== id)
         );
-        alert("Contact deleted!");
+        showNotification("Contact deleted!");
       }
     } catch (error) {
-      alert("Couldn't delete!", error.message);
+      showNotification(`Couldn't delete: ${error.message}`);
     }
   };
 
@@ -110,14 +120,14 @@ function App() {
       );
 
       if (res.data.length === 0) {
-        alert("No contacts found!");
+        showNotification("No contacts found!");
         setContacts(contacts);
       } else {
         setContacts(res.data);
         console.log(res.data);
       }
     } catch (error) {
-      alert("Error to search by the name!", error.message);
+      showNotification(`Error to search by the name!`, error.message);
     }
   };
 
@@ -203,6 +213,15 @@ function App() {
           contactToEdit={contactToEdit}
           saveUpdatedContact={saveUpdatedContact}
         />
+      )}
+      {/* Notiication */}
+      {notification && (
+        <div
+          className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-8 py-4 rounded-lg shadow-lg z-50 
+    sm:px-4 sm:py-2 sm:text-sm lg:px-16 lg:py-8 lg:text-8xl"
+        >
+          {notification}
+        </div>
       )}
     </div>
   );
