@@ -1,17 +1,17 @@
 import { useSelector } from "react-redux";
 import cartImage from "../../../public/grocery-store.png";
 import CartModal from "../cartModal/CartModal";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { selectProductsCount } from "../../redux/cart/cart.selectors";
 useSelector;
 
 export default function Header() {
-  const [cartModal, setcartModal] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
 
   const { products } = useSelector((rootReducer) => rootReducer.cartReducer);
 
   const handleCartModal = () => {
-    setcartModal(!cartModal);
+    setCartModal(!cartModal);
   };
 
   const productsCount = useSelector(selectProductsCount);

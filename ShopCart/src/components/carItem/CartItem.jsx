@@ -49,7 +49,7 @@ export default function CartItem({
           </p>
           {showBuyButton && (
             <button
-              className="rounded-md bg-green-600 text-white border-white border-2 w-16 mt-4 md:mt-24 lg:text-4xl lg:w-[8vw] lg:h-[4vh] hover:scale-105 transition-transform lg:mt-8"
+              className="rounded-md bg-green-600 text-white border-white border-2 w-16 mt-4 md:mt-24 lg:text-4xl lg:w-[8vw] lg:h-[4vh] hover:scale-110 transition-transform lg:mt-8"
               onClick={() => handleProductClick(product)}
             >
               BUY
@@ -76,7 +76,7 @@ export default function CartItem({
             {showRemoveButton && (
               <div>
                 <button
-                  className="bg-red-600 w-16 rounded-md text-white mt-2 hover:bg-red-700 transition-colors lg:w-[3vw] lg:h-[2vh] lg:text-3xl"
+                  className="bg-red-600 w-16 rounded-md text-white mt-2 hover:bg-red-700 transition-colors lg:w-[3vw] lg:h-[2vh] lg:text-3xl hover:scale-110"
                   onClick={handleRemoveClick}
                 >
                   CLEAN
