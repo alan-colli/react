@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Projects() {
   return (
     <div className="w-[100vw] h-[100vh] bg-black flex flex-col justify-center  items-center text-white text-3xl md:text-5xl lg:text-9xl">
-      <div className="flex flex-col space-y-12 lg:space-y-32">
+      <div className="flex flex-col space-y-12 lg:space-y-32 items-center justify-center">
         <Link to="/projects/route1" className="hover:scale-110">
           <p>Countries App (API)</p>
         </Link>
