@@ -3,6 +3,8 @@ import config from "./src/constants/index.js";
 import auth from "./src/routes/auth.js";
 
 const app = express();
+app.use(express.json());
+
 const { PORT } = config;
 app.use("/api", auth);
 
