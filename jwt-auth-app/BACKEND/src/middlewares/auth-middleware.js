@@ -1,4 +1,5 @@
 import { validationResult } from "express-validator";
+import passport from "passport";
 
 export const validationMiddleware = (req, res, next) => {
   let errors = validationResult(req);
@@ -10,3 +11,5 @@ export const validationMiddleware = (req, res, next) => {
   }
   next();
 };
+
+export const userAuth = passport.authenticate("jwt", { session: false });
