@@ -22,5 +22,5 @@ router.get("/get-users", getUsers);
 router.post("/protected", userAuth, isProtected);
 router.post("/register", registerValidation, validationMiddleware, register);
 router.post("/login", loginValidation, validationMiddleware, login);
-router.get("/logout", userAuth, logout);
+router.get("/logout", logout);
 export default router;
