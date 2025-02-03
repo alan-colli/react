@@ -9,7 +9,7 @@ const Header = () => {
           <li>
             <Link
               to="/"
-              className="text-gray-100 hover:text-gray-600 text-xl lg:text-8xl"
+              className="text-gray-100 hover:text-gray-600 text-xl lg:text-4xl hover:scale-110"
             >
               Home
             </Link>
@@ -17,7 +17,7 @@ const Header = () => {
           <li>
             <Link
               to="/projects"
-              className="text-gray-100 hover:text-gray-500 text-xl lg:text-8xl"
+              className="text-gray-100 hover:text-gray-600 text-xl lg:text-4xl hover:scale-110"
             >
               Projects
             </Link>
@@ -25,7 +25,7 @@ const Header = () => {
           <li>
             <Link
               to="/contact"
-              className="text-gray-100 hover:text-gray-500 text-xl lg:text-8xl"
+              className="text-gray-100 hover:text-gray-600 text-xl lg:text-4xl hover:scale-110"
             >
               Contact
             </Link>

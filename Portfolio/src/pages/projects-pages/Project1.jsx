@@ -6,17 +6,17 @@ function Route1() {
   return (
     <div className="w-full min-h-screen bg-black flex flex-col items-center justify-start">
       <div className="text-white px-4 py-6 mt-[12vh] w-full text-center lg:w-[50vw]">
-        <p className="text-lg sm:text-xl mb-4 lg:text-7xl">
+        <p className="text-lg sm:text-xl mb-4 lg:text-4xl">
           In this project, I developed an app that shows information about any
           country from an API.
         </p>
-        <p className="text-lg sm:text-xl mb-6 lg:text-7xl">
+        <p className="text-lg sm:text-xl mb-4 lg:text-4xl">
           Built with ReactJS, TailwindCSS, and Axios, this project taught me how
           APIs work and how to interact with them.
         </p>
 
         <div className="mb-6">
-          <p className="text-lg sm:text-xl mb-2 lg:text-7xl lg:my-24">
+          <p className="text-lg sm:text-xl mb-2 lg:text-4xl lg:my-24">
             Using a mobile-first approach, here’s how the app looks:
           </p>
           <img
@@ -27,7 +27,7 @@ function Route1() {
         </div>
 
         <div className="mb-6">
-          <p className="text-lg sm:text-xl mb-2 lg:text-7xl lg:my-24 ">
+          <p className="text-lg sm:text-xl mb-2 lg:text-4xl lg:my-24 ">
             Here’s how the app works:
           </p>
 
@@ -42,7 +42,7 @@ function Route1() {
         </div>
 
         <div className="mb-6">
-          <p className="text-lg sm:text-xl mb-2 lg:text-7xl lg:my-24">
+          <p className="text-lg sm:text-xl mb-2 lg:text-4xl lg:my-24">
             App running in a bigger screen:
           </p>
 

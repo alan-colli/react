@@ -15,6 +15,7 @@ function App() {
         <div className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/portfolio/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/route1" element={<Route1 />} />
             <Route path="/projects/route2" element={<Route2 />} />
