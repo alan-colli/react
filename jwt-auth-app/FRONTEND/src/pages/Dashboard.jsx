@@ -16,13 +16,12 @@ const Dashboard = () => {
       await onLogout();
       dispatch(unauthenticateUser());
       localStorage.removeItem("isAuth");
-      localStorage.removeItem("token");
+      localStorage.removeItem("token"); // Remova o token também
       navigate("/login");
     } catch (error) {
-      console.log("Erro no logout:", error.response);
+      console.log("Erro no logout:", error);
     }
   };
-
   const protectedInfo = async () => {
     try {
       const { data } = await fetchProtectedInfo();
@@ -40,6 +39,14 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // Redirecione imediatamente se não houver token
+    if (!token) {
+      logout();
+      return;
+    }
+
     protectedInfo();
   }, []);
 

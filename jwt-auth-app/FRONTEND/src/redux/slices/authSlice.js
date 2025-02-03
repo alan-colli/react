@@ -3,14 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const checkAuthState = () => {
   const token = localStorage.getItem("token");
   const isAuth = localStorage.getItem("isAuth") === "true";
-  return { isAuth, token };
+
+  // Só considera autenticado se ambos existirem
+  return token && isAuth
+    ? { isAuth: true, token }
+    : { isAuth: false, token: null };
 };
 
-const initialState = {
-  isAuth: checkAuthState().isAuth,
-  token: checkAuthState().token,
-};
-
+const initialState = checkAuthState(); // Estado inicial baseado em token + isAuth
 export const authSlice = createSlice({
   name: "auth",
   initialState,
