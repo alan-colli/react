@@ -1,7 +1,6 @@
 import {
   BrowserRouter,
   Navigate,
-  Router,
   Route,
   Outlet,
   Routes,
@@ -13,15 +12,15 @@ import Dashboard from "./pages/Dashboard";
 import { useSelector } from "react-redux";
 
 const PrivateRoute = () => {
-  const authState = useSelector((state) => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
 
-  return <>{authState ? <Outlet /> : <Navigate to="/login" />}</>;
+  return <>{isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
 };
 
 const RestrictedRoute = () => {
-  const authState = useSelector((state) => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
 
-  return <>{!authState ? <Outlet /> : <Navigate to="/dashboard" />}</>;
+  return <>{!isAuth ? <Outlet /> : <Navigate to="/dashboard" />}</>;
 };
 
 function App() {

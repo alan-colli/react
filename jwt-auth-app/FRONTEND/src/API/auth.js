@@ -15,6 +15,11 @@ export async function onLogout() {
   return await axios.get("http://localhost:5001/api/logout");
 }
 
-export async function protectedInfo() {
-  return await axios.get("http://localhost:5001/api/protected");
-}
+export const fetchProtectedInfo = async () => {
+  const token = localStorage.getItem("token");
+  return await api.get("/protected", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

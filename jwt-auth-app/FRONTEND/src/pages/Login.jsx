@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { onLogin } from "../API/auth";
 import { useDispatch } from "react-redux";
 import { authenticateUser } from "../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [values, setValues] = useState({
@@ -10,22 +11,33 @@ function Login() {
     password: "",
   });
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const dispatch = useDispatch();
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await onLogin(values);
-      setError(false);
+      const response = await onLogin(values);
+
+      // Armazena o token e atualiza o estado
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("isAuth", "true");
       dispatch(authenticateUser());
+
+      // Redireciona após login bem-sucedido
+      navigate("/dashboard");
     } catch (error) {
-      console.log(error.response.data.errors[0].msg);
-      setError(error.response.data.errors[0].msg);
+      console.log(
+        error.response?.data?.errors?.[0]?.msg || "Erro desconhecido"
+      );
+      setError(
+        error.response?.data?.errors?.[0]?.msg || "Credenciais inválidas"
+      );
     }
   };
 

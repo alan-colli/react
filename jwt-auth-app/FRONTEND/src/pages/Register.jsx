@@ -21,8 +21,11 @@ function Register() {
       const response = await onRegistration(values);
       console.log(response);
       setError(false);
-      setSucces("User has been created", true);
-      setValues();
+      setSucces("User has been created");
+      setValues({
+        email: "",
+        password: "",
+      });
     } catch (error) {
       console.log(error.response.data.errors[0].msg);
       setError(error.response.data.errors[0].msg);

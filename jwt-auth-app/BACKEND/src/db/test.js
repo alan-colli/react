@@ -1,4 +1,4 @@
-import pool from "./index.js"; // Substitua pelo caminho correto
+import pool from "./index.js";
 
 async function testConnection() {
   try {
