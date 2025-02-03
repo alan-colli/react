@@ -37,13 +37,13 @@ function App() {
       >
         <input
           type="text"
-          className="rounded-md bg-gray-200 text-black pl-2 h-8 lg:w-[30vw] lg:h-32 lg:text-7xl"
+          className="rounded-md bg-gray-200 text-black pl-2 h-8 lg:w-[30vw] lg:h-12 lg:text-3xl outline-none"
         />
         <button type="submit">
           <img
             src="/glass.png"
             alt="search photo"
-            className="w-6 lg:w-24 bg-gray-200 rounded-sm"
+            className="w-6 lg:w-12 bg-gray-200 rounded-sm p-1 lg:p-2"
           />
         </button>
       </form>

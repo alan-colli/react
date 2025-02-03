@@ -18,22 +18,22 @@ export default function CountryCard({ country }) {
       </div>
 
       <div className="w-full md:w-1/2 p-6 flex flex-col justify-center lg:space-y-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:text-7xl">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:text-3xl">
           {country.name?.common}
         </h2>
-        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-6xl">
-          <span className="font-bold lg:text-6xl">Capital:</span>{" "}
+        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-3xl">
+          <span className="font-bold lg:text-3xl">Capital:</span>{" "}
           {country.capital?.[0]}
         </p>
-        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-6xl">
-          <span className="font-bold lg:text-6xl">Continent:</span>{" "}
+        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-3xl">
+          <span className="font-bold lg:text-3xl">Continent:</span>{" "}
           {country.continents?.[0]}
         </p>
-        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-6xl">
-          <span className="font-bold lg:text-6xl">Population:</span>{" "}
+        <p className="text-lg font-medium text-gray-700 mb-2 lg:text-3xl">
+          <span className="font-bold lg:text-3xl">Population:</span>{" "}
           {country.population.toLocaleString("pt-BR")}
         </p>
-        <p className="text-lg font-medium text-gray-700 lg:text-6xl">
+        <p className="text-lg font-medium text-gray-700 lg:text-3xl">
           <span className="font-bold">Language:</span>{" "}
           {country.languages
             ? Object.values(country.languages).join(", ")
