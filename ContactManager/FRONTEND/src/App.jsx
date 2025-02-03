@@ -137,7 +137,7 @@ function App() {
 
       {/* Add Contact Button */}
       <button
-        className="flex justify-center items-center bg-blue-950 text-gray-100 w-12 h-12 rounded-full mt-6 text-2xl lg:text-8xl lg:w-32 lg:h-32"
+        className="flex justify-center items-center bg-blue-950 text-gray-100 w-12 h-12 rounded-full mt-6 text-2xl lg:text-8xl lg:w-24 lg:h-24 lg:pb-4"
         onClick={handleModalToAdd}
       >
         +
@@ -148,7 +148,7 @@ function App() {
         <input
           type="text"
           placeholder="Search by name..."
-          className="flex-1 rounded-md pl-2  lg:text-4xl"
+          className="flex-1 rounded-md pl-2  lg:text-4xl outline-none"
           onChange={(e) => setSearchName(e.target.value)}
         />
         <button onClick={handleSearchContact}>
@@ -175,23 +175,23 @@ function App() {
             </div>
             <div className="space-x-2 flex justify-center items-center">
               <button
-                className="bg-red-600 rounded-full w-8 h-8 lg:w-24 lg:h-24 flex justify-center items-center"
+                className="bg-red-600 rounded-full w-8 h-8 lg:w-16 lg:h-16 flex justify-center items-center"
                 onClick={() => deleteContact(contact.id)}
               >
                 <img
                   src="./src/public/trash.png"
                   alt="trash icon"
-                  className="w-6 lg:w-12"
+                  className="w-6 lg:w-12 lg:p-2"
                 />
               </button>
               <button
-                className="bg-blue-600 rounded-full w-8 h-8 lg:w-24 lg:h-24 flex justify-center items-center"
+                className="bg-blue-600 rounded-full w-8 h-8 lg:w-16 lg:h-16 flex justify-center items-center"
                 onClick={() => handleUpdateContact(contact.id)}
               >
                 <img
                   src="./src/public/botao-editar.png"
                   alt="edit icon"
-                  className="w-6 lg:w-12"
+                  className="w-6 lg:w-12 lg:p-2"
                 />
               </button>
             </div>
@@ -218,7 +218,7 @@ function App() {
       {notification && (
         <div
           className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-8 py-4 rounded-lg shadow-lg z-50 
-    sm:px-4 sm:py-2 sm:text-sm lg:px-16 lg:py-8 lg:text-8xl"
+    sm:px-4 sm:py-2 sm:text-sm lg:px-8 lg:py-4 lg:text-3xl"
         >
           {notification}
         </div>

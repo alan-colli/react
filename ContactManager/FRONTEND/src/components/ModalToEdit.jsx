@@ -21,17 +21,17 @@ export default function ModalToEdit({
       <main className="bg-gray-100 w-[80vw] h-[70vh] rounded-md flex flex-col items-center lg:w-[60vw] lg:h-[60vh]">
         <div className="w-[78vw] justify-end flex lg:w-[59vw]">
           <button
-            className="bg-red-600 w-8 mt-2 rounded-full border-2  text-white border-white lg:w-24 lg:h-24 lg:text-6xl"
+            className="bg-red-600 w-8 mt-2 rounded-full border-2  text-white border-white lg:w-16 lg:h-16 lg:text-6xl"
             onClick={handleModalToEdit}
           >
             X
           </button>
         </div>
         <div className="w-[70vw] h-[55vh] bg-gray-300 rounded-md flex justify-center items-center flex-col space-y-8 lg:w-[55vw] lg:h-[50vh]">
-          <p className="lg:text-8xl">First Name:</p>
+          <p className="lg:text-3xl ">First Name:</p>
           <input
             type="text"
-            className="w-40 pl-2 lg:w-[12vw] lg:h-16 lg:text-5xl"
+            className="w-40 pl-2 lg:w-[12vw] lg:h-8 lg:text-2xl outline-none"
             value={editedContact?.first_name}
             onChange={(e) =>
               setEditedContact((prev) => ({
@@ -40,10 +40,10 @@ export default function ModalToEdit({
               }))
             }
           />
-          <p className="lg:text-8xl">Last Name:</p>
+          <p className="lg:text-3xl">Last Name:</p>
           <input
             type="text"
-            className="w-40 pl-2 lg:w-[12vw] lg:h-16 lg:text-5xl"
+            className="w-40 pl-2 lg:w-[12vw] lg:h-8 lg:text-2xl outline-none"
             value={editedContact?.last_name}
             onChange={(e) =>
               setEditedContact((prev) => ({
@@ -52,10 +52,10 @@ export default function ModalToEdit({
               }))
             }
           />
-          <p className="lg:text-8xl">Phone Number:</p>
+          <p className="lg:text-3xl">Phone Number:</p>
           <input
             type="text"
-            className="w-40 pl-2 lg:w-[12vw] lg:h-16 lg:text-5xl"
+            className="w-40 pl-2 lg:w-[12vw] lg:h-8 lg:text-2xl outline-none"
             placeholder="XX-XXXX XXXX"
             value={editedContact?.phone_number}
             onChange={(e) => {
@@ -76,7 +76,7 @@ export default function ModalToEdit({
           />
         </div>
         <button
-          className="border-gray-200 border-2 bg-blue-600  w-20 rounded-full mt-4 text-gray-200 lg:w-[8vw] lg:h-24 lg:text-6xl"
+          className="border-gray-200 border-2 bg-blue-600  w-20 rounded-full mt-4 text-gray-200 lg:w-[8vw] lg:h-16 lg:text-3xl"
           onClick={handleSubmit}
         >
           SUBMIT
