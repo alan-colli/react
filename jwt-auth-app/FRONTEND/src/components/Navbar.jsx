@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  const isAuth = false;
+  const { isAuth } = useSelector((state) => state.auth);
   return (
     <nav className="flex w-[100vw] h-[7vh] bg-blue-300 justify-between items-center ">
       <div className="text-2xl m-2">
