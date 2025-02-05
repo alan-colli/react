@@ -4,7 +4,7 @@ import "./home.css";
 export default function Home() {
   return (
     <Navbar>
-      <p>Home</p>
+      <div>Home</div>
     </Navbar>
   );
 }

@@ -4,7 +4,7 @@ import "./register.css";
 export default function Register() {
   return (
     <Layout>
-      <div>Registers</div>;
+      <div>Registers</div>
     </Layout>
   );
 }
