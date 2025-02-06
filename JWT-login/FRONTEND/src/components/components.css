@@ -17,3 +17,10 @@
   text-decoration: none;
   color: white;
 }
+
+.mainDiv {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

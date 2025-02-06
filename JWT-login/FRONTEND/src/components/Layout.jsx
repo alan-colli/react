@@ -3,7 +3,7 @@ import "./components.css";
 
 export default function Layout({ children }) {
   return (
-    <div>
+    <div className="mainDiv">
       <Navbar />
       <div>{children}</div>
     </div>

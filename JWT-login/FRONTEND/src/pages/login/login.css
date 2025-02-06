@@ -1,5 +1,5 @@
 .backspace {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,7 @@
   flex-direction: column;
   border-radius: 10px;
   margin-bottom: 70px;
+  margin-top: 150px;
 }
 
 .name-container {
@@ -31,11 +32,11 @@
   flex-direction: column;
 }
 
-.input {
+.inputLogin {
   margin-block: 30px;
 }
 
-.button {
+.buttonDesactivate {
   margin-top: 40px;
   color: white;
   background-color: rgb(14, 193, 252);
@@ -43,5 +44,12 @@
   height: 30px;
   border-radius: 10px;
 }
-.button::hover {
+.buttonActivate {
+  margin-top: 40px;
+  background: blue;
+  transform: scale(1.15);
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  color: white;
 }
