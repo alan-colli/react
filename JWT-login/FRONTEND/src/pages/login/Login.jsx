@@ -14,7 +14,6 @@ export default function Login() {
     console.log("O formulário foi enviado!");
   };
 
-  console.log(inputChange);
   return (
     <Layout>
       <div className="backspace">
