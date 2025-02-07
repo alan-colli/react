@@ -3,12 +3,18 @@ import AddModal from "./components/AddModal";
 
 function App() {
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [people, setPeople] = useState([]);
 
   const handleAddModal = () => {
     setOpenAddModal(!openAddModal);
   };
-  console.log(people);
+
+  const handleDelete = (id) => {
+    setPeople(people.filter((ppl) => ppl.id !== id));
+  };
+
+  const handleEdit = (id) => {};
 
   return (
     <div className="min-h-screen w-[100vw] bg-green-950 flex justify-start items-center flex-col">
@@ -34,8 +40,18 @@ function App() {
                 <p>Age: {ppl.age}</p>
               </div>
               <div className="pr-4 space-x-4 items-center justify-center flex">
-                <button className="bg-blue-600 w-6 h-6 rounded-full">o</button>
-                <button className="bg-red-600 w-6 h-6 rounded-full">a</button>
+                <button
+                  className="bg-blue-600 w-6 h-6 rounded-full"
+                  onClick={() => handleEdit(ppl.id)}
+                >
+                  E
+                </button>
+                <button
+                  className="bg-red-600 w-6 h-6 rounded-full"
+                  onClick={() => handleDelete(ppl.id)}
+                >
+                  D
+                </button>
               </div>
             </li>
           </div>
