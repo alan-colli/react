@@ -1,20 +1,30 @@
 import { useState } from "react";
 import AddModal from "./components/AddModal";
+import EditModal from "./components/EditModal";
 
 function App() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [people, setPeople] = useState([]);
+  const [update, setUpdate] = useState({});
 
   const handleAddModal = () => {
     setOpenAddModal(!openAddModal);
+  };
+
+  const handleEditModal = () => {
+    setOpenEditModal(!openEditModal);
   };
 
   const handleDelete = (id) => {
     setPeople(people.filter((ppl) => ppl.id !== id));
   };
 
-  const handleEdit = (id) => {};
+  const handleUpdate = (id) => {
+    const personToTupdate = people.find((ppl) => ppl.id === id);
+    setUpdate(personToTupdate);
+    setOpenEditModal(true);
+  };
 
   return (
     <div className="min-h-screen w-[100vw] bg-green-950 flex justify-start items-center flex-col">
@@ -42,7 +52,7 @@ function App() {
               <div className="pr-4 space-x-4 items-center justify-center flex">
                 <button
                   className="bg-blue-600 w-6 h-6 rounded-full"
-                  onClick={() => handleEdit(ppl.id)}
+                  onClick={() => handleUpdate(ppl.id)}
                 >
                   E
                 </button>
@@ -59,6 +69,15 @@ function App() {
       </div>
       {openAddModal && (
         <AddModal handleAddModal={handleAddModal} setPeople={setPeople} />
+      )}
+      {openEditModal && (
+        <EditModal
+          handleEditModal={handleEditModal}
+          update={update}
+          setUpdate={setUpdate}
+          setPeople={setPeople}
+          people={people}
+        />
       )}
     </div>
   );
