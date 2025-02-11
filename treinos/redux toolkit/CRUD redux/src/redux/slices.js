@@ -26,9 +26,18 @@ export const personSlice = createSlice({
         (person) => person.id !== action.payload
       );
     },
+    updatePersonSlice: (state, action) => {
+      const index = state.person.findIndex(
+        (ppl) => ppl.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.person[index] = action.payload; // Atualiza a pessoa no array
+      }
+    },
   },
 });
 
-export const { addPerson, removePerson } = personSlice.actions;
+export const { addPerson, removePerson, updatePersonSlice } =
+  personSlice.actions;
 
 export default personSlice.reducer;

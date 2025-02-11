@@ -1,10 +1,13 @@
 import AddModal from "./modals/AddModal";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removePerson } from "./redux/slices";
+import { removePerson, updatePersonSlice } from "./redux/slices";
+import EditModal from "./modals/EditModal";
 
 export default function App() {
   const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [update, setUpdate] = useState({ name: "", age: 0 });
 
   const people = useSelector((state) => state.person.person);
 
@@ -14,11 +17,20 @@ export default function App() {
     setAddModal(!addModal);
   };
 
+  const handleEditModal = () => {
+    setEditModal(!editModal);
+  };
+
   const deletePerson = (id) => {
     dispatch(removePerson(id));
   };
 
-  const updatePerson = (id) => {};
+  const updatePerson = (ppl) => {
+    setUpdate(ppl);
+    handleEditModal();
+    dispatch(updatePersonSlice(ppl));
+  };
+  console.log(update);
   return (
     <div className="min-h-screen w-[100vw] flex flex-col items-center bg-black justify-start">
       <header className="bg-green-800  h-[10vh] w-[100vw] flex justify-center items-center text-4xl">
@@ -50,7 +62,7 @@ export default function App() {
                 </button>
                 <button
                   className="bg-blue-600 text-white rounded-4xl w-12"
-                  onClick={() => updatePerson(ppl.id)}
+                  onClick={() => updatePerson(ppl)}
                 >
                   UPD
                 </button>
@@ -60,6 +72,9 @@ export default function App() {
         </div>
       </div>
       {addModal && <AddModal handleAddModal={handleAddModal} />}
+      {editModal && (
+        <EditModal handleEditModal={handleEditModal} update={update} />
+      )}
     </div>
   );
 }
