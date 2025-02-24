@@ -5,8 +5,4 @@ const router = express.Router();
 
 router.get("user/:email", getUser);
 
-router.get("/", (req, res) => {
-  res.send("Route ok");
-});
-
 export default router;
