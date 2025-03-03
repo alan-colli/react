@@ -4,7 +4,7 @@ dotenv.config();
 import pg from "pg";
 const { Pool } = pg;
 
-console.log("Caminho do .env:", process.cwd()); // Verifique o diretório atual
+console.log("Caminho do .env:", process.cwd());
 console.log("DB_USER:", process.env.DB_USER);
 console.log("DB_HOST:", process.env.DB_HOST);
 console.log("DB_NAME:", process.env.DB_NAME);
