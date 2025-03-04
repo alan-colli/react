@@ -1,4 +1,5 @@
 import { pool } from "../database/db.js";
+import bcrypt from "bcrypt";
 
 export const getUserByEmail = async (email) => {
   const result = await pool.query("SELECT * FROM users WHERE email = $1", [
@@ -7,18 +8,11 @@ export const getUserByEmail = async (email) => {
   return result.rows[0];
 };
 
-export const postNewUser = async (name, email, password_hash) => {
+export async function createUser(name, email, password) {
+  const hashedPassword = await bcrypt.hash(password, 10);
   const result = await pool.query(
     "INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3) RETURNING *",
-    [name, email, password_hash]
+    [name, email, hashedPassword]
   );
   return result.rows[0];
-};
-
-export const putUserByEmail = async (name, email, password_hash, id) => {
-  const result = await pool.query(
-    "UPDATE users SET name=$1, email=$2, password_hash=$3 WHERE id=$4 RETURNING *",
-    [name, email, password_hash, id]
-  );
-  return result.rows[0];
-};
+}
