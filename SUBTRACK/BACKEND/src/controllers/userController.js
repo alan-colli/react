@@ -1,4 +1,8 @@
-import { getUserByEmail, postNewUser } from "../models/models.js";
+import {
+  getUserByEmail,
+  postNewUser,
+  putUserByEmail,
+} from "../models/models.js";
 
 export const getUser = async (req, res) => {
   try {
@@ -24,5 +28,21 @@ export const postUser = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+export const putUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, password_hash } = req.body;
+    const put_user = await putUserByEmail(name, email, password_hash, id);
+    if (!put_user) {
+      return res.status(404).json({ message: "User not found!" });
+    }
+    return res
+      .status(200)
+      .json({ message: "User updated succesfully!", user: put_user });
+  } catch (error) {
+    res.status(500).json({ message: "Error", error: error.message });
   }
 };
