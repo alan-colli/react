@@ -7,8 +7,6 @@ async function testConnection() {
     client.release();
   } catch (err) {
     console.error("Erro na conexão:", err);
-  } finally {
-    await pool.end();
   }
 }
 
