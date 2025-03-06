@@ -1,4 +1,4 @@
-import { getUserByEmail, createUser } from "../models/models.js";
+import { getUserByEmail, createUser, deleteUser } from "../models/models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
@@ -50,4 +50,16 @@ export const register = async (req, res) => {
 
   const user = await createUser(name, email, password_hash);
   res.json(user);
+};
+
+export const deleteUserController = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    await deleteUser(userId);
+
+    return res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    throw error;
+  }
 };

@@ -16,3 +16,7 @@ export async function createUser(name, email, password) {
   );
   return result.rows[0];
 }
+
+export const deleteUser = async (userId) => {
+  const result = await pool.query("DELETE FROM users WHERE id = $1", [userId]);
+};
