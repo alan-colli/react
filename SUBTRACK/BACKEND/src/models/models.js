@@ -29,10 +29,15 @@ export const getUserStreamingServices = async (userId) => {
   return result.rows;
 };
 
-export const addStreamingService = async (userId, service_name, plan_price) => {
+export const addStreamingService = async (
+  userId,
+  service_name,
+  plan_price,
+  start_date
+) => {
   const result = await pool.query(
-    "INSERT INTO user_streaming_services (user_id, service_name, plan_price) VALUES ($1, $2, $3) RETURNING *",
-    [userId, service_name, plan_price]
+    "INSERT INTO user_streaming_services (user_id, service_name, plan_price, start_date) VALUES ($1, $2, $3, $4) RETURNING *",
+    [userId, service_name, plan_price, start_date]
   );
   return result.rows[0];
 };
@@ -49,11 +54,12 @@ export const updateStreamingService = async (
   userId,
   serviceId,
   service_name,
-  plan_price
+  plan_price,
+  start_date
 ) => {
   const result = await pool.query(
-    "UPDATE user_streaming_services SET service_name = $1, plan_price = $2 WHERE user_id = $3 AND id = $4 RETURNING *",
-    [service_name, plan_price, userId, serviceId]
+    "UPDATE user_streaming_services SET service_name = $1, plan_price = $2, start_date = $3 WHERE user_id = $4 AND id = $5 RETURNING *",
+    [service_name, plan_price, start_date, userId, serviceId]
   );
   return result.rows[0];
 };

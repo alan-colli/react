@@ -82,18 +82,27 @@ export const getUserStreamingServicesController = async (req, res) => {
 export const addStreamingServiceController = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { service_name, plan_price } = req.body;
+    const { service_name, plan_price, start_date } = req.body;
 
-    if (!service_name || !plan_price) {
+    if (!service_name || !plan_price || !start_date) {
       return res.status(400).json({
-        error: "Service name and plan price are required",
+        error: "Service name, plan price, and start date are required",
+      });
+    }
+
+    // Validar o formato da data
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(start_date)) {
+      return res.status(400).json({
+        error: "Start date must be in YYYY-MM-DD format",
       });
     }
 
     const newService = await addStreamingService(
       userId,
       service_name,
-      plan_price
+      plan_price,
+      start_date
     );
     return res.status(201).json(newService);
   } catch (error) {
@@ -135,7 +144,7 @@ export const updateStreamingServiceController = async (req, res) => {
   try {
     const userId = req.user.id;
     const { serviceId } = req.params;
-    const { service_name, plan_price } = req.body;
+    const { service_name, plan_price, start_date } = req.body;
 
     if (!serviceId) {
       return res.status(400).json({
@@ -143,9 +152,17 @@ export const updateStreamingServiceController = async (req, res) => {
       });
     }
 
-    if (!service_name || !plan_price) {
+    if (!service_name || !plan_price || !start_date) {
       return res.status(400).json({
-        error: "Service name and plan price are required",
+        error: "Service name, plan price, and start date are required",
+      });
+    }
+
+    // Validar o formato da data
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(start_date)) {
+      return res.status(400).json({
+        error: "Start date must be in YYYY-MM-DD format",
       });
     }
 
@@ -153,7 +170,8 @@ export const updateStreamingServiceController = async (req, res) => {
       userId,
       serviceId,
       service_name,
-      plan_price
+      plan_price,
+      start_date
     );
 
     if (!updatedService) {
