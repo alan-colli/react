@@ -1,11 +1,6 @@
 import { getUserByEmail, createUser, deleteUser } from "../models/models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const SECRET_KEY = process.env.SECRET_KEY;
 
 export const login = async (req, res) => {
   try {
