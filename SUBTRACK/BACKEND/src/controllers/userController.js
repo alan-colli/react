@@ -86,7 +86,7 @@ export const addStreamingServiceController = async (req, res) => {
 
     if (!service_name || !plan_price) {
       return res.status(400).json({
-        error: "Nome do serviço e preço do plano são obrigatórios",
+        error: "Service name and plan price are required",
       });
     }
 
@@ -97,8 +97,8 @@ export const addStreamingServiceController = async (req, res) => {
     );
     return res.status(201).json(newService);
   } catch (error) {
-    console.error("Erro ao adicionar serviço de streaming:", error);
-    return res.status(500).json({ error: "Erro interno do servidor" });
+    console.error("Error adding streaming service:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -109,7 +109,7 @@ export const deleteStreamingServiceController = async (req, res) => {
 
     if (!serviceId) {
       return res.status(400).json({
-        error: "ID do serviço é obrigatório",
+        error: "Service ID is required",
       });
     }
 
@@ -117,17 +117,17 @@ export const deleteStreamingServiceController = async (req, res) => {
 
     if (!deletedService) {
       return res.status(404).json({
-        error: "Serviço não encontrado ou não pertence ao usuário",
+        error: "Service not found or does not belong to user",
       });
     }
 
     return res.status(200).json({
-      message: "Serviço deletado com sucesso",
+      message: "Service deleted successfully",
       deletedService,
     });
   } catch (error) {
-    console.error("Erro ao deletar serviço de streaming:", error);
-    return res.status(500).json({ error: "Erro interno do servidor" });
+    console.error("Error deleting streaming service:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -139,13 +139,13 @@ export const updateStreamingServiceController = async (req, res) => {
 
     if (!serviceId) {
       return res.status(400).json({
-        error: "ID do serviço é obrigatório",
+        error: "Service ID is required",
       });
     }
 
     if (!service_name || !plan_price) {
       return res.status(400).json({
-        error: "Nome do serviço e preço do plano são obrigatórios",
+        error: "Service name and plan price are required",
       });
     }
 
@@ -158,16 +158,16 @@ export const updateStreamingServiceController = async (req, res) => {
 
     if (!updatedService) {
       return res.status(404).json({
-        error: "Serviço não encontrado ou não pertence ao usuário",
+        error: "Service not found or does not belong to user",
       });
     }
 
     return res.status(200).json({
-      message: "Serviço atualizado com sucesso",
+      message: "Service updated successfully",
       updatedService,
     });
   } catch (error) {
-    console.error("Erro ao atualizar serviço de streaming:", error);
-    return res.status(500).json({ error: "Erro interno do servidor" });
+    console.error("Error updating streaming service:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
