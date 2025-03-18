@@ -123,7 +123,7 @@ function AppContent() {
 
       <footer className={`py-4 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between md:justify-center items-center">
             <p
               className={`text-sm ${
                 isDarkMode ? "text-gray-300" : "text-gray-600"

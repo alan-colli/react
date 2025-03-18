@@ -50,7 +50,7 @@ export default function Home() {
           >
             Key Features
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div
               className={`p-6 rounded-lg shadow-lg ${
                 isDarkMode ? "bg-gray-800" : "bg-white"
