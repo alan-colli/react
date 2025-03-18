@@ -21,7 +21,8 @@ export const deleteUser = async (userId) => {
   const result = await pool.query("DELETE FROM users WHERE id = $1", [userId]);
 };
 
-export const getUserStreamingServices = async (userId) => {
+// Funções para gerenciar streams
+export const getStreams = async (userId) => {
   const result = await pool.query(
     "SELECT * FROM user_streaming_services WHERE user_id = $1",
     [userId]
@@ -29,7 +30,7 @@ export const getUserStreamingServices = async (userId) => {
   return result.rows;
 };
 
-export const addStreamingService = async (
+export const addStream = async (
   userId,
   service_name,
   plan_price,
@@ -42,10 +43,10 @@ export const addStreamingService = async (
   return result.rows[0];
 };
 
-export const deleteStreamingService = async (userId, serviceId) => {
+export const deleteStream = async (streamId, userId) => {
   const result = await pool.query(
     "DELETE FROM user_streaming_services WHERE user_id = $1 AND id = $2 RETURNING *",
-    [userId, serviceId]
+    [userId, streamId]
   );
   return result.rows[0];
 };
