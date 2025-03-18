@@ -3,15 +3,13 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Routes, Route, Link } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
-import { translations } from "./translations";
 
 function AppContent() {
-  const { isDarkMode, toggleTheme, language, toggleLanguage } = useTheme();
-  const t = translations[language];
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <div
-      className={`flex flex-col h-screen ${
+      className={`flex flex-col min-h-screen ${
         isDarkMode ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
@@ -34,40 +32,27 @@ function AppContent() {
                 : "bg-gray-200 hover:bg-gray-300"
             }`}
             aria-label={
-              isDarkMode ? "Mudar para tema claro" : "Mudar para tema escuro"
+              isDarkMode ? "Switch to light mode" : "Switch to dark mode"
             }
           >
             {isDarkMode ? "LIGHT" : "DARK"}
-          </button>
-          <button
-            onClick={toggleLanguage}
-            className={`p-2 rounded-full ${
-              isDarkMode
-                ? "bg-gray-700 hover:bg-gray-600"
-                : "bg-gray-200 hover:bg-gray-300"
-            }`}
-            aria-label={
-              language === "pt" ? "Change to English" : "Mudar para português"
-            }
-          >
-            {language === "pt" ? "🇺🇸" : "🇧🇷"}
           </button>
           <Link
             to="/auth/login"
             className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
           >
-            {t.nav.login}
+            Login
           </Link>
           <Link
             to="/auth/register"
             className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
           >
-            {t.nav.register}
+            Register
           </Link>
         </div>
       </nav>
 
-      <main className="flex-1">
+      <main className="flex-1 p-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth/login" element={<Login />} />

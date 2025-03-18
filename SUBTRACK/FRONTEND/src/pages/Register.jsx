@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import { translations } from "../translations";
 
 export default function Register() {
-  const { isDarkMode, language } = useTheme();
-  const t = translations[language];
+  const { isDarkMode } = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +14,7 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implementar lógica de registro aqui
+    // Implement registration logic here
   };
 
   const handleChange = (e) => {
@@ -28,40 +26,28 @@ export default function Register() {
   };
 
   return (
-    <div
-      className={`min-h-[93vh] flex items-center justify-center px-4 ${
-        isDarkMode ? "bg-gray-900" : "bg-gray-100"
-      }`}
-    >
+    <div className="flex flex-col items-center justify-center min-h-[91vh]">
       <div
-        className={`max-w-md w-full p-8 rounded-lg shadow-lg ${
+        className={`p-8 rounded-lg shadow-lg w-full max-w-md ${
           isDarkMode ? "bg-gray-800" : "bg-white"
         }`}
       >
         <h2
-          className={`text-2xl font-bold text-center mb-2 ${
+          className={`text-2xl font-bold mb-6 text-center ${
             isDarkMode ? "text-white" : "text-gray-800"
           }`}
         >
-          {t.register.title}
+          Register
         </h2>
-        <p
-          className={`text-center mb-6 ${
-            isDarkMode ? "text-gray-400" : "text-gray-600"
-          }`}
-        >
-          {t.register.subtitle}
-        </p>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="name"
-              className={`block text-sm font-medium mb-1 ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
+              className={`block mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-700"
               }`}
             >
-              {t.register.name}
+              Name
             </label>
             <input
               type="text"
@@ -69,26 +55,25 @@ export default function Register() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 rounded-lg border ${
+              className={`w-full p-2 rounded border ${
                 isDarkMode
                   ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-900"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  : "bg-white border-gray-300 text-gray-800"
+              }`}
               required
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">{errors.name}</p>
             )}
           </div>
-
           <div>
             <label
               htmlFor="email"
-              className={`block text-sm font-medium mb-1 ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
+              className={`block mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-700"
               }`}
             >
-              {t.register.email}
+              Email
             </label>
             <input
               type="email"
@@ -96,26 +81,25 @@ export default function Register() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 rounded-lg border ${
+              className={`w-full p-2 rounded border ${
                 isDarkMode
                   ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-900"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  : "bg-white border-gray-300 text-gray-800"
+              }`}
               required
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
           </div>
-
           <div>
             <label
               htmlFor="password"
-              className={`block text-sm font-medium mb-1 ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
+              className={`block mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-700"
               }`}
             >
-              {t.register.password}
+              Password
             </label>
             <input
               type="password"
@@ -123,26 +107,25 @@ export default function Register() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-3 py-2 rounded-lg border ${
+              className={`w-full p-2 rounded border ${
                 isDarkMode
                   ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-900"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  : "bg-white border-gray-300 text-gray-800"
+              }`}
               required
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
             )}
           </div>
-
           <div>
             <label
               htmlFor="confirmPassword"
-              className={`block text-sm font-medium mb-1 ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
+              className={`block mb-2 ${
+                isDarkMode ? "text-white" : "text-gray-700"
               }`}
             >
-              {t.register.confirmPassword}
+              Confirm Password
             </label>
             <input
               type="password"
@@ -150,11 +133,11 @@ export default function Register() {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className={`w-full px-3 py-2 rounded-lg border ${
+              className={`w-full p-2 rounded border ${
                 isDarkMode
                   ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-900"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                  : "bg-white border-gray-300 text-gray-800"
+              }`}
               required
             />
             {errors.confirmPassword && (
@@ -163,26 +146,30 @@ export default function Register() {
               </p>
             )}
           </div>
-
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            className={`w-full py-2 px-4 rounded ${
+              isDarkMode
+                ? "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-blue-500 hover:bg-blue-600 text-white"
+            }`}
           >
-            {t.register.submit}
+            Register
           </button>
         </form>
-
         <p
           className={`mt-4 text-center ${
-            isDarkMode ? "text-gray-400" : "text-gray-600"
+            isDarkMode ? "text-white" : "text-gray-700"
           }`}
         >
-          {t.register.haveAccount}{" "}
+          Already have an account?{" "}
           <Link
             to="/auth/login"
-            className="text-blue-600 hover:text-blue-700 font-semibold"
+            className={`${
+              isDarkMode ? "text-blue-400" : "text-blue-600"
+            } hover:underline`}
           >
-            {t.register.login}
+            Login
           </Link>
         </p>
       </div>
