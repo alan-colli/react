@@ -1,118 +1,121 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const { isDarkMode } = useTheme();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [errors, setErrors] = useState({});
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement login logic here
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    try {
+      setError("");
+      setLoading(true);
+      await login({ email, password });
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message || "Falha ao fazer login");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[91vh]">
+    <div
+      className={`min-h-screen flex items-center justify-center ${
+        isDarkMode ? "bg-gray-900" : "bg-gray-100"
+      }`}
+    >
       <div
-        className={`p-8 rounded-lg shadow-lg w-full max-w-md ${
+        className={`max-w-md w-full p-8 rounded-lg shadow-lg ${
           isDarkMode ? "bg-gray-800" : "bg-white"
         }`}
       >
         <h2
-          className={`text-2xl font-bold mb-6 text-center ${
-            isDarkMode ? "text-white" : "text-gray-800"
+          className={`text-3xl font-bold text-center mb-8 ${
+            isDarkMode ? "text-white" : "text-gray-900"
           }`}
         >
           Login
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
-              htmlFor="email"
-              className={`block mb-2 ${
-                isDarkMode ? "text-white" : "text-gray-700"
+              className={`block text-sm font-medium mb-2 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
               }`}
             >
               Email
             </label>
             <input
               type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`w-full p-2 rounded border ${
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`w-full px-4 py-2 rounded-lg border ${
                 isDarkMode
                   ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-800"
+                  : "bg-white border-gray-300 text-gray-900"
               }`}
               required
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
           </div>
+
           <div>
             <label
-              htmlFor="password"
-              className={`block mb-2 ${
-                isDarkMode ? "text-white" : "text-gray-700"
+              className={`block text-sm font-medium mb-2 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
               }`}
             >
               Password
             </label>
             <input
               type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={`w-full p-2 rounded border ${
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`w-full px-4 py-2 rounded-lg border ${
                 isDarkMode
                   ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-800"
+                  : "bg-white border-gray-300 text-gray-900"
               }`}
               required
             />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-            )}
           </div>
+
           <button
             type="submit"
-            className={`w-full py-2 px-4 rounded ${
-              isDarkMode
-                ? "bg-blue-600 hover:bg-blue-700 text-white"
-                : "bg-blue-500 hover:bg-blue-600 text-white"
+            disabled={loading}
+            className={`w-full py-2 px-4 rounded-lg font-semibold text-white ${
+              loading
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            Login
+            {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
+
         <p
           className={`mt-4 text-center ${
-            isDarkMode ? "text-white" : "text-gray-700"
+            isDarkMode ? "text-gray-300" : "text-gray-600"
           }`}
         >
           Don't have an account?{" "}
           <Link
             to="/auth/register"
-            className={`${
-              isDarkMode ? "text-blue-400" : "text-blue-600"
-            } hover:underline`}
+            className="text-blue-600 hover:text-blue-700"
           >
             Register
           </Link>

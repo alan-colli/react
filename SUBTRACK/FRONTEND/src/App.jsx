@@ -1,11 +1,26 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { Routes, Route, Link } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+
+// Componente para proteger rotas que requerem autenticação
+function PrivateRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/auth/login" />;
+}
 
 function AppContent() {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <div
@@ -37,18 +52,41 @@ function AppContent() {
           >
             {isDarkMode ? "LIGHT" : "DARK"}
           </button>
-          <Link
-            to="/auth/login"
-            className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
-          >
-            Login
-          </Link>
-          <Link
-            to="/auth/register"
-            className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
-          >
-            Register
-          </Link>
+          {user ? (
+            <>
+              <Link
+                to="/dashboard"
+                className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className={`px-4 py-2 rounded-lg font-medium ${
+                  isDarkMode
+                    ? "bg-red-600 hover:bg-red-700 text-white"
+                    : "bg-red-500 hover:bg-red-600 text-white"
+                }`}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/auth/login"
+                className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
+              >
+                Login
+              </Link>
+              <Link
+                to="/auth/register"
+                className={`${isDarkMode ? "text-white" : "text-gray-800"}`}
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 
@@ -57,6 +95,14 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </main>
 
@@ -74,7 +120,9 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

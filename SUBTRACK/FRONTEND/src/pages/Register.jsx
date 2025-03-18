@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
   const { isDarkMode } = useTheme();
+  const { register } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,10 +14,38 @@ export default function Register() {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement registration logic here
+    setError("");
+    setErrors({});
+
+    // Validações
+    if (formData.password !== formData.confirmPassword) {
+      setErrors({ confirmPassword: "As senhas não coincidem" });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setErrors({ password: "A senha deve ter pelo menos 6 caracteres" });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message || "Erro ao criar conta");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -37,8 +68,15 @@ export default function Register() {
             isDarkMode ? "text-white" : "text-gray-800"
           }`}
         >
-          Register
+          Create Account
         </h2>
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
@@ -148,13 +186,14 @@ export default function Register() {
           </div>
           <button
             type="submit"
+            disabled={loading}
             className={`w-full py-2 px-4 rounded ${
               isDarkMode
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
                 : "bg-blue-500 hover:bg-blue-600 text-white"
-            }`}
+            } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
           >
-            Register
+            {loading ? "Criando conta..." : "Criar Conta"}
           </button>
         </form>
         <p
