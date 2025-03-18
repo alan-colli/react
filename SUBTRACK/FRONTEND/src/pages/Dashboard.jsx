@@ -117,7 +117,7 @@ export default function Dashboard() {
                 : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
           >
-            {showAddForm ? "Cancelar" : "Adicionar Stream"}
+            {showAddForm ? "Cancel" : "Add Stream"}
           </button>
         </div>
 
@@ -133,7 +133,7 @@ export default function Dashboard() {
                 isDarkMode ? "text-white" : "text-gray-900"
               }`}
             >
-              Adicionar Novo Stream
+              Add New Stream
             </h2>
             {formError && (
               <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -147,7 +147,7 @@ export default function Dashboard() {
                     isDarkMode ? "text-gray-300" : "text-gray-700"
                   }`}
                 >
-                  Nome do Serviço
+                  Service Name
                 </label>
                 <input
                   type="text"
@@ -169,7 +169,7 @@ export default function Dashboard() {
                     isDarkMode ? "text-gray-300" : "text-gray-700"
                   }`}
                 >
-                  Preço do Plano
+                  Plan Price
                 </label>
                 <input
                   type="number"
@@ -193,7 +193,7 @@ export default function Dashboard() {
                     isDarkMode ? "text-gray-300" : "text-gray-700"
                   }`}
                 >
-                  Data de Início
+                  Start Date
                 </label>
                 <input
                   type="date"
@@ -217,7 +217,7 @@ export default function Dashboard() {
                     : "bg-green-500 hover:bg-green-600 text-white"
                 }`}
               >
-                Adicionar
+                Add
               </button>
             </form>
           </div>
@@ -234,7 +234,7 @@ export default function Dashboard() {
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            Resumo
+            Summary
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
@@ -247,7 +247,7 @@ export default function Dashboard() {
                   isDarkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                Total de Streams
+                Total Streams
               </p>
               <p
                 className={`text-2xl font-bold ${
@@ -267,14 +267,14 @@ export default function Dashboard() {
                   isDarkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                Gasto Total
+                Total Spending
               </p>
               <p
                 className={`text-2xl font-bold ${
                   isDarkMode ? "text-white" : "text-gray-900"
                 }`}
               >
-                R$ {calculateTotalSpending().toFixed(2)}
+                $ {calculateTotalSpending().toFixed(2)}
               </p>
             </div>
           </div>
@@ -291,11 +291,11 @@ export default function Dashboard() {
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            Streams Ativos
+            Active Streams
           </h2>
           {loading ? (
             <p className={`${isDarkMode ? "text-white" : "text-gray-900"}`}>
-              Carregando...
+              Loading...
             </p>
           ) : error ? (
             <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -334,14 +334,14 @@ export default function Dashboard() {
                           isDarkMode ? "text-white" : "text-gray-900"
                         }`}
                       >
-                        R$ {parseFloat(stream.plan_price).toFixed(2)}
+                        $ {parseFloat(stream.plan_price).toFixed(2)}
                       </p>
                       <p
                         className={`text-sm ${
                           isDarkMode ? "text-gray-300" : "text-gray-600"
                         }`}
                       >
-                        {calculateStreamPercentage(stream.plan_price)}% do total
+                        {calculateStreamPercentage(stream.plan_price)}% of total
                       </p>
                     </div>
                   </div>
@@ -353,7 +353,7 @@ export default function Dashboard() {
                         : "bg-red-500 hover:bg-red-600 text-white"
                     }`}
                   >
-                    Remover
+                    Remove
                   </button>
                 </div>
               ))}
@@ -363,7 +363,7 @@ export default function Dashboard() {
                     isDarkMode ? "text-gray-300" : "text-gray-600"
                   }`}
                 >
-                  Nenhum stream ativo. Adicione um novo stream para começar!
+                  None active stream. Add a new stream to start!
                 </p>
               )}
             </div>

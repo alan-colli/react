@@ -103,7 +103,7 @@ export default function Login() {
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {loading ? "Entrando..." : "Entrar"}
+            {loading ? "Entering..." : "Enter"}
           </button>
         </form>
 

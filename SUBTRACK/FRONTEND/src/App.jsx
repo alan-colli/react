@@ -11,7 +11,7 @@ import { AuthProvider } from "./context/AuthContext";
 // Componente para proteger rotas que requerem autenticação
 function PrivateRoute({ children }) {
   const { user } = useAuth();
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/auth/login" />;
 }
 
 function AppContent() {
@@ -21,12 +21,14 @@ function AppContent() {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/auth/login");
   };
 
   return (
     <div
-      className={`min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}
+      className={`min-h-screen flex flex-col ${
+        isDarkMode ? "bg-gray-900" : "bg-gray-100"
+      }`}
     >
       <nav className={`p-4 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -62,7 +64,7 @@ function AppContent() {
                       : "bg-red-500 hover:bg-red-600 text-white"
                   }`}
                 >
-                  Sair
+                  Exit
                 </button>
               </>
             ) : (
@@ -85,7 +87,7 @@ function AppContent() {
                       : "bg-green-500 hover:bg-green-600 text-white"
                   }`}
                 >
-                  Registrar
+                  Register
                 </Link>
               </>
             )}
@@ -103,19 +105,35 @@ function AppContent() {
         </div>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/register" element={<Register />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </main>
+
+      <footer className={`py-4 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p
+              className={`text-sm ${
+                isDarkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
+              © 2025 AlanColli
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

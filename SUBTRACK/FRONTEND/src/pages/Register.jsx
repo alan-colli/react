@@ -193,7 +193,7 @@ export default function Register() {
                 : "bg-blue-500 hover:bg-blue-600 text-white"
             } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
           >
-            {loading ? "Criando conta..." : "Criar Conta"}
+            {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
         <p
